@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./git.nix
+    ./neovim.nix
+  ];
+
   home.username = "zifan";
   home.homeDirectory = "/home/zifan";
 
@@ -13,82 +18,21 @@
     pkgs.ncdu
     pkgs.htop
   ];
+
   home.stateVersion = "22.11";
   programs.bash.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
- 
-  systemd.user.sessionVariables = {
-    EDITOR = "vim";
-  };
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
 
-  # check https://jeppesen.io/git-commit-sign-nix-home-manager-ssh/
-  programs.git = {
-    enable = true;
-    userName = "Zifan Hua";
-    userEmail = "zifan.hua@icloud.com";
 
-    extraConfig = {
-      core.editor = "nvim"; 
-      # Sign all commits using ssh key
-      commit.gpgsign = true;
-      gpg.format = "ssh";
-  gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-      user.signingkey = "~/.ssh/id_rsa.pub";
-    };
-  };
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    withNodeJs = true;
-    extraConfig = "
-  ${builtins.readFile ./neovim/init.vim}
-    ";
-    extraLuaConfig = "
-  ${builtins.readFile ./neovim/init.lua}
-    ";
-    plugins = with pkgs.vimPlugins; [
-      tokyonight-nvim
-      vim-nix
-      lualine-nvim
-      wildfire-vim
-    ];
-    coc = {
-      enable = true;
-      settings = {
-        "diagnostic.virtualTextCurrentLineOnly" = true;
-        "rust-analyzer.check.command" = "clippy";
-        "rust-analyzer.check.features" = "all";
-        "tailwindCSS.includeLanguages" = {
-          "eelixir" = "html";
-          "elixir" = "html";
-          "eruby" = "html";
-          "html.twig" = "html";
-          "javascript" = "javascriptreact";
-          "rs" = "html";
-          "rust" = "html";
-        };
-        "markdownlint.config" = {
-          "MD013" = {
-            "code_block_line_length" = 120;
-          };
-          "code_block_line_length" = 120;
-        };
-        "cSpell.language" = "en-GB";
-  };
-    };
-  };
   programs.zsh = {
     enable = true;
     enableSyntaxHighlighting = true;
     initExtra = "
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-      source ~/.p10k.zsh
+      
+      ${builtins.readFile ./p10k.zsh}
 
       # check https://github.com/marlonrichert/zsh-autocomplete
       bindkey '\\t' menu-complete \"$terminfo[kcbt]\" reverse-menu-complete
@@ -130,6 +74,5 @@
       ];
     };
   };
-  home.file.".p10k.zsh".source = ./p10k.zsh;
 }
 
