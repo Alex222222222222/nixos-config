@@ -8,12 +8,15 @@
     pkgs.zsh
     pkgs.firefox
 
-    pkgs.rust-analyzer
+    # pkgs.rust-analyzer
+    
+    pkgs.ncdu
+    pkgs.htop
   ];
   home.stateVersion = "22.11";
   programs.bash.enable = true;
 
-# Let Home Manager install and manage itself.
+  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
  
   systemd.user.sessionVariables = {
