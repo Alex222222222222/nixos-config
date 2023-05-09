@@ -11,6 +11,8 @@
       <home-manager/nixos>
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -135,13 +137,14 @@
       ";
       plugins = with pkgs.vimPlugins; [
         tokyonight-nvim
-	lualine-nvim
-	wildfire-vim
+        vim-nix
+	    lualine-nvim
+	    wildfire-vim
       ];
       coc = {
-	enable = true;
-	settings = {
-	  "diagnostic.virtualTextCurrentLineOnly" = true;
+	    enable = true;
+	    settings = {
+	      "diagnostic.virtualTextCurrentLineOnly" = true;
     	  "rust-analyzer.check.command" = "clippy";
     	  "rust-analyzer.check.features" = "all";
     	  "tailwindCSS.includeLanguages" = {
@@ -168,20 +171,20 @@
       enableSyntaxHighlighting = true;
       initExtra = "
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-	source ~/.p10k.zsh
+        source ~/.p10k.zsh
 
-	# check https://github.com/marlonrichert/zsh-autocomplete
-	bindkey '\\t' menu-complete \"$terminfo[kcbt]\" reverse-menu-complete
-	# bindkey '\\t' menu-select \"$terminfo[kcbt]\" menu-select
-	# bindkey -M menuselect '\\t' menu-complete \"$terminfo[kcbt]\" reverse-menu-complete
-	# all Tab widgets
-	zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
-	# all history widgets
-	zstyle ':autocomplete:*history*:*' insert-unambiguous yes
-	# ^S
-	zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
-	# bindkey -M menu-select '\\r' .accept-line
-	zstyle ':autocomplete:*' min-delay 0.10  # seconds (float)
+        # check https://github.com/marlonrichert/zsh-autocomplete
+        bindkey '\\t' menu-complete \"$terminfo[kcbt]\" reverse-menu-complete
+        # bindkey '\\t' menu-select \"$terminfo[kcbt]\" menu-select
+        # bindkey -M menuselect '\\t' menu-complete \"$terminfo[kcbt]\" reverse-menu-complete
+        # all Tab widgets
+        zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+        # all history widgets
+        zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+        # ^S
+        zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+        # bindkey -M menu-select '\\r' .accept-line
+        zstyle ':autocomplete:*' min-delay 0.10  # seconds (float)
       ";
       shellAliases = {
         l = "ls -a";
