@@ -33,13 +33,13 @@
     plugins = [
       {
         name = "zsh-autocomplete";
-    file = "zsh-autocomplete.plugin.zsh";
-    src = pkgs.fetchgit {
-      url = "https://github.com/marlonrichert/zsh-autocomplete.git";
-      rev = "eee8bbeb717e44dc6337a799ae60eda02d371b73";
-      fetchSubmodules = true;
-      hash = "sha256-2qkB8I3GXeg+mH8l12N6dnKtdnaxTeLf5lUHWxA2rNg=";
-    };
+        file = "zsh-autocomplete.plugin.zsh";
+        src = pkgs.fetchgit {
+          url = "https://github.com/marlonrichert/zsh-autocomplete.git";
+          rev = "eee8bbeb717e44dc6337a799ae60eda02d371b73";
+          fetchSubmodules = true;
+          hash = "sha256-2qkB8I3GXeg+mH8l12N6dnKtdnaxTeLf5lUHWxA2rNg=";
+        };
       }
     ];
     zplug = {

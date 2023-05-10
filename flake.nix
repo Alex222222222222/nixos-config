@@ -1,6 +1,24 @@
 {
   description = "Alex222222222222 configuration for arm64 nix os";
 
+  nixConfig = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = [
+      "https://cache.nixos.org/"
+      "https://mirrors.bfsu.edu.cn/nix-channels/store"
+    ];
+
+    # nix community's cache server
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
+
   # 这是 flake.nix 的标准格式，inputs 是 flake 的依赖，outputs 是 flake 的输出
   # inputs 中的每一项依赖都会在被拉取、构建后，作为参数传递给 outputs 函数 
   inputs = {
