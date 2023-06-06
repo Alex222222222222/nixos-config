@@ -26,8 +26,12 @@
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.networkmanager = {
+  #   enable = true;
+  #
+  # };  # Easiest to use and most distros use this by default.
   networking.usePredictableInterfaceNames = false;
+  networking.dhcpcd.enable = true;
   systemd.network = {
     enable = true;
     networks."eth0".extraConfig = ''
@@ -37,6 +41,9 @@
       # Add your own assigned ipv6 subnet here here!
       Address = 2a01:4f9:c012:4dbf::/64
       Gateway = fe80::1
+      # optionally you can do the same for ipv4 and disable DHCP (networking.dhcpcd.enable = false;)
+      # Address =  144.x.x.x/26
+      # Gateway = 144.x.x.1
     '';
   };
 
