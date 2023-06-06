@@ -41,12 +41,16 @@
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
     nixosConfigurations = {
-      hetzner = nixpkgs.lib.nixosSystem {
+      hetzner = 
+      nixpkgs.lib.nixosSystem
+      let
         system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system}; 
+      in
+      {
+        system = ${system};
 
-        specialArgs = 
-        let pkgs = nixpkgs.legacyPackages."x86_64-linux"; in
-        { inherit inputs pkgs; };
+        specialArgs = { inherit inputs pkgs; };
    
         modules = [
           ./hetzner/configuration.nix
@@ -58,10 +62,10 @@
 
             # 这里的 ryan 也得替换成你的用户名
             # 这里的 import 指令在前面 Nix 语法中介绍过了，不再赘述
-            # home-manager.users.zifan = import ./zifan/default.nix ;
+            home-manager.users.zifan = import ./zifan/default.nix ;
             # 使用 home-manager.extraSpecialArgs 自定义传递给 ./home.nix 的参数
             # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
-            # home-manager.extraSpecialArgs = inputs;
+            home-manager.extraSpecialArgs = { inherit inputs pkgs; }
           }
         ];
       };
