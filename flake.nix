@@ -62,7 +62,7 @@
           }
         ];
       };
-    }
+    };
     nixosConfigurations.m1-qemu-virtual-machine = {
       # hostname 为 nixos-test 的主机会使用这个配置
       # 这里使用了 nixpkgs.lib.nixosSystem 函数来构建配置，后面的 attributes set 是它的参数

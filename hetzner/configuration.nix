@@ -120,9 +120,12 @@
   networking.firewall.enable = true;
 
   environment.systemPackages = with nixpkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
+    git
+    ncdu
+    tmux
   ];
 
   # This value determines the NixOS release from which the default
