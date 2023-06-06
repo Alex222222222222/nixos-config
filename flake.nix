@@ -40,8 +40,8 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
-    nixosConfigurations.hetzner = {
-      nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations = {
+      hetzner = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
 
@@ -62,12 +62,11 @@
           }
         ];
       };
-    };
-    nixosConfigurations.m1-qemu-virtual-machine = {
+
       # hostname 为 nixos-test 的主机会使用这个配置
       # 这里使用了 nixpkgs.lib.nixosSystem 函数来构建配置，后面的 attributes set 是它的参数
       # 在 nixos 系统上使用如下命令即可部署此配置：`nixos-rebuild switch --flake .#nixos-test`
-      nixos = nixpkgs.lib.nixosSystem {
+      m1-qemu-virtual-machine = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs; };
 
