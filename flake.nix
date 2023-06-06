@@ -19,16 +19,16 @@
     ];
   };
 
-  # 这是 flake.nix 的标准格式，inputs 是 flake 的依赖，outputs 是 flake 的输出
-  # inputs 中的每一项依赖都会在被拉取、构建后，作为参数传递给 outputs 函数 
   inputs = {
-    # flake inputs 有很多种引用方式，应用最广泛的是 github 的引用方式
-
     # NixOS 官方软件源，这里使用 nixos-unstable 分支
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # home-manager，用于管理用户配置
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs"; 
+
+    # check https://nixos.wiki/wiki/Agenix
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # outputs 即 flake 的所有输出，其中的 nixosConfigurations 即 NixOS 系统配置
@@ -50,7 +50,7 @@
       nixpkgs.lib.nixosSystem {
         system = system;
 
-        specialArgs = { inherit inputs pkgs system-stateVersion; };
+        specialArgs = { inherit inputs pkgs system-stateVersion system; };
    
         modules = [
           ./hetzner/configuration.nix

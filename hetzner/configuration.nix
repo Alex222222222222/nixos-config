@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, system-stateVersion, ... }:
+{ inputs, config, pkgs, system-stateVersion, system, ... }:
 
 {
   imports =
@@ -185,6 +185,8 @@
     git
     ncdu
     tmux
+  ] ++ [
+    inputs.agenix.packages.${system}.default
   ];
 
   # This value determines the NixOS release from which the default
