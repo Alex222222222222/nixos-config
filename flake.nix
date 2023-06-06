@@ -47,7 +47,7 @@
         pkgs = nixpkgs.legacyPackages.${system}; 
       in
       nixpkgs.lib.nixosSystem {
-        system = ${system};
+        system = system;
 
         specialArgs = { inherit inputs pkgs; };
    
