@@ -43,8 +43,10 @@
     nixosConfigurations = {
       hetzner = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
 
+        let pkgs = nixpkgs.legacyPackages."x86_64-linux"; in
+        specialArgs = { inherit inputs pkgs; };
+   
         modules = [
           ./hetzner/configuration.nix
 
