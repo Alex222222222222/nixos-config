@@ -15,10 +15,10 @@
     vimAlias = true;
     withNodeJs = true;
     extraConfig = "
-      ${builtins.readFile ./neovim/init.vim}
+      ${builtins.readFile ./init.vim}
     ";
     extraLuaConfig = "
-      ${builtins.readFile ./neovim/init.lua}
+      ${builtins.readFile ./init.lua}
     ";
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim

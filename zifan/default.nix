@@ -3,7 +3,7 @@
 {
   imports = [
     ./git.nix
-    ./neovim/neovim.nix
+    ./neovim/default.nix
     ./zsh/zsh.nix
   ];
 
@@ -12,7 +12,6 @@
 
   home.packages = [
     pkgs.zsh
-    pkgs.neovim
     pkgs.wget
     pkgs.curl
     pkgs.ncdu
