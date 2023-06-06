@@ -40,12 +40,35 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
-    nixosConfigurations = {
+    nixosConfigurations.hetzner = {
+      nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+
+        modules = [
+          ./hetzner/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            # 这里的 ryan 也得替换成你的用户名
+            # 这里的 import 指令在前面 Nix 语法中介绍过了，不再赘述
+            # home-manager.users.zifan = import ./zifan/default.nix ;
+            # 使用 home-manager.extraSpecialArgs 自定义传递给 ./home.nix 的参数
+            # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
+            # home-manager.extraSpecialArgs = inputs;
+          }
+        ];
+      };
+    }
+    nixosConfigurations.m1-qemu-virtual-machine = {
       # hostname 为 nixos-test 的主机会使用这个配置
       # 这里使用了 nixpkgs.lib.nixosSystem 函数来构建配置，后面的 attributes set 是它的参数
       # 在 nixos 系统上使用如下命令即可部署此配置：`nixos-rebuild switch --flake .#nixos-test`
       nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = "aarch64-linux";
         specialArgs = { inherit inputs; };
 
         # modules 中每个参数，都是一个 Nix Module，nixpkgs manual 中有半份介绍它的文档：
@@ -65,7 +88,7 @@
         modules = [
           # 导入之前我们使用的 configuration.nix，这样旧的配置文件仍然能生效
           # 注：configuration.nix 本身也是一个 NixOS Module，因此可以直接在这里导入
-          ./configuration.nix
+          ./m1-qemu-virtual-machine/configuration.nix
 
           home-manager.nixosModules.home-manager
           {
@@ -74,7 +97,7 @@
 
             # 这里的 ryan 也得替换成你的用户名
             # 这里的 import 指令在前面 Nix 语法中介绍过了，不再赘述
-            # home-manager.users.zifan = import ./zifan/default.nix ;
+            home-manager.users.zifan = import ./zifan/default.nix ;
             # 使用 home-manager.extraSpecialArgs 自定义传递给 ./home.nix 的参数
             # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
             # home-manager.extraSpecialArgs = inputs;
