@@ -130,7 +130,7 @@ augroup ToggleExplorer
   autocmd Filetype,BufEnter * call s:toggle_explorer()
 augroup END
 
-colorscheme tokyonight-day
+colorscheme tokyonight-moon
 
     " coc-nvim
         " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count

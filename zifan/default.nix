@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./git.nix { inherit pkgs; }
-    ./neovim/neovim.nix { inherit pkgs; }
-    ./zsh/zsh.nix { inherit pkgs; }
+    ./git.nix
+    ./neovim/neovim.nix
+    ./zsh/zsh.nix
   ];
 
   home.username = "zifan";
