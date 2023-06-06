@@ -42,12 +42,11 @@
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
     nixosConfigurations = {
       hetzner = 
-      nixpkgs.lib.nixosSystem
       let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.${system}; 
       in
-      {
+      nixpkgs.lib.nixosSystem {
         system = ${system};
 
         specialArgs = { inherit inputs pkgs; };
