@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./git.nix
-    ./neovim.nix
-    ./zsh.nix
+    ./git.nix { inherit pkgs; }
+    ./neovim/neovim.nix { inherit pkgs; }
+    ./zsh/zsh.nix { inherit pkgs; }
   ];
 
   home.username = "zifan";
@@ -12,10 +12,9 @@
 
   home.packages = [
     pkgs.zsh
-    pkgs.firefox
-
-    # pkgs.rust-analyzer
-    
+    pkgs.neovim
+    pkgs.wget
+    pkgs.curl
     pkgs.ncdu
     pkgs.htop
   ];
