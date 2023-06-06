@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, system-stateVersion, ... }:
 
 {
   imports = [
@@ -20,7 +20,7 @@
     pkgs.htop
   ];
 
-  # home.stateVersion = "23.05";
+  home.stateVersion = system-stateVersion;
   programs.bash.enable = true;
 
   # Let Home Manager install and manage itself.
