@@ -16,7 +16,7 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  # boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -46,7 +46,30 @@
       # Gateway = 144.x.x.1
     '';
   };
-
+  networking.nameservers = [
+    # google dns
+    "8.8.8.8"
+    "8.8.4.4"
+    "2001:4860:4860::8888"
+    "2001:4860:4860::8844"
+    "2001:4860:4860:0:0:0:0:8888"
+    "2001:4860:4860:0:0:0:0:8844"
+    # cloudflare dns
+    "1.1.1.1"
+    "2606:4700:4700::1111"
+    "1.0.0.1"
+    "2606:4700:4700::1001"
+    # cloudflare dns block malware
+    "1.1.1.2"
+    "1.0.0.2"
+    "2606:4700:4700::1112"
+    "2606:4700:4700::1002"
+    # cloudflare dns block malware and adult content
+    "1.1.1.3"
+    "1.0.0.3"
+    "2606:4700:4700::1113"
+    "2606:4700:4700::1003"
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
