@@ -27,6 +27,19 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.usePredictableInterfaceNames = false;
+  systemd.network = {
+    enable = true;
+    networks."eth0".extraConfig = ''
+      [Match]
+      Name = eth0
+      [Network]
+      # Add your own assigned ipv6 subnet here here!
+      Address = 2a01:4f9:c012:4dbf::/64
+      Gateway = fe80::1
+    '';
+  };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
