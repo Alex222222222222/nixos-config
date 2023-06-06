@@ -20,7 +20,7 @@
     pkgs.htop
   ];
 
-  home.stateVersion = "22.11";
+  # home.stateVersion = "23.05";
   programs.bash.enable = true;
 
   # Let Home Manager install and manage itself.
