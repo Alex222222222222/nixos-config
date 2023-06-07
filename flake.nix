@@ -61,6 +61,8 @@
           ./hetzner/cloudflare-warp-proxy.nix
           ./hetzner/v2ray.nix
           ./hetzner/freshrss.nix
+          ./hetzner/searx/searx.nix
+
 
           agenix.nixosModules.default
 
