@@ -13,7 +13,7 @@
   };
   environment.etc."davfs2/conf" = {
     text = ''
-      secrets /etc/davfs2/secrets
+      secrets ${config.age.secrets.hetzner-webdav-secrets.path}
     '';
     mode = "0440";
   };

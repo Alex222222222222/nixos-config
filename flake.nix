@@ -57,6 +57,9 @@
           ./secrets/secrets-path.nix
           ./hetzner/hetzner-webdav.nix
           ./hetzner/networking.nix
+          ./hetzner/docker.nix
+          ./hetzner/cloudflare-warp-proxy.nix
+          ./hetzner/v2ray.nix
 
           agenix.nixosModules.default
 

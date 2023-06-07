@@ -11,4 +11,6 @@ let
 in
 {
   "hetzner-webdav-secrets".publicKeys = systems ++ users;
+  "cloudflare-email-api-key".publicKeys = systems ++ users;
+  "v2ray-config".publicKeys = systems ++ users;
 }

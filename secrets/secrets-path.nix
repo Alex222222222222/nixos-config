@@ -1,6 +1,10 @@
-{config, inputs, ...}:
+{config, inputs, system, ...}:
 {
   imports = [
+  ];
+
+  environment.systemPackages = [
+    inputs.agenix.packages.${system}.default
   ];
 
   age.secrets = {
@@ -9,7 +13,18 @@
       owner = "root";
       group = "root";
       mode = "600";
-      path = "/etc/davfs2/secrets";
+    };
+    cloudflare-email-api-key = {
+      file = ./cloudflare-email-api-key;
+      owner = "root";
+      group = "root";
+      mode = "600";
+    };
+    v2ray-config = {
+      file = ./v2ray-config;
+      owner = "root";
+      group = "root";
+      mode = "600";
     };
   };
 }
