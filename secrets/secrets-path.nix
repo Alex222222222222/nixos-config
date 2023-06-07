@@ -1,7 +1,6 @@
 {config, inputs, ...}:
 {
   imports = [
-    inputs.agenix.nixosModules.age
   ];
 
   age.secrets = {

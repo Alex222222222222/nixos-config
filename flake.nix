@@ -54,10 +54,11 @@
    
         modules = [
           ./hetzner/configuration.nix
-
           ./secrets/secrets-path.nix
-
           ./hetzner/hetzner-webdav.nix
+          ./hetzner/networking.nix
+
+          agenix.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
