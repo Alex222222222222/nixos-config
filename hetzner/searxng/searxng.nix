@@ -5,14 +5,14 @@ let
 in
 {
   environment.etc = {
-    # "searxng/settings.yml".source = ./settings.yml;
-    # "searxng/uwsgi.ini".source = ./uwsgi.ini;
+    "searxng/settings.yml".source = ./settings.yml;
+    "searxng/uwsgi.ini".source = ./uwsgi.ini;
   };
 
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
-    searx = {
-      image = "searx/searx";
+    searxng = {
+      image = "searxng/searxng";
       autoStart = true;
       ports = [ "127.0.0.1:${web-port}:8080" ];
       environment = {
@@ -20,7 +20,7 @@ in
         INSTANCE_NAME = "HuaSearch";
       };
       volumes = [
-        "/etc/searx:/etc/searx"
+        "/etc/searxng:/etc/searxng"
       ];
       extraOptions = [
       ];
