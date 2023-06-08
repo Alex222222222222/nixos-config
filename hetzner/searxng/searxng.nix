@@ -1,13 +1,19 @@
-{config, ...}:
+{config, pkgs, ...}:
 let
   web-domain = "search.huazifan.eu.org";
   web-port = "9080";
 in
 {
-  environment.etc = {
-    "searxng/settings.yml".source = ./settings.yml;
-    "searxng/uwsgi.ini".source = ./uwsgi.ini;
-  };
+  # environment.etc = {
+  #   "searxng/settings.yml".source = ./settings.yml;
+  #   "searxng/uwsgi.ini".source = ./uwsgi.ini;
+  # };
+
+  system.activationScripts.copySearXNGConfig = ''
+    mkdir -p /var/lib/searxng/
+    cp ${./settings.yml} /var/lib/searxng/settings.yml
+    cp ${./uwsgi.ini} /var/lib/searxng/uwsgi.ini
+  '';
 
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
@@ -20,7 +26,7 @@ in
         INSTANCE_NAME = "HuaSearch";
       };
       volumes = [
-        "/etc/searxng:/etc/searxng"
+        "/var/lib/searxng:/etc/searxng"
       ];
       extraOptions = [
       ];

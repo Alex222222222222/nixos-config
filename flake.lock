@@ -102,6 +102,23 @@
         "type": "path"
       }
     },
+    "jellyfin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-qxPbzFcfnGYx6klDBJt56PfMUD4j5HC5druGOSi40GI=",
+        "path": "./app/jellyfin",
+        "type": "path"
+      },
+      "original": {
+        "path": "./app/jellyfin",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1686020360,
@@ -123,6 +140,7 @@
         "agenix": "agenix",
         "home-manager": "home-manager_2",
         "hysteria": "hysteria",
+        "jellyfin": "jellyfin",
         "nixpkgs": "nixpkgs"
       }
     }

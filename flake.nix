@@ -32,6 +32,9 @@
 
     hysteria.url = "path:./app/hysteria";
     hysteria.inputs.nixpkgs.follows = "nixpkgs";
+
+    jellyfin.url = "path:./app/jellyfin";
+    jellyfin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # outputs 即 flake 的所有输出，其中的 nixosConfigurations 即 NixOS 系统配置
@@ -71,6 +74,9 @@
 
           inputs.hysteria.nixosModules.with-cloudflare-acme
           ./hetzner/hysteria.nix
+
+          inputs.jellyfin.nixosModules.with-nginx-cloudlfare-acme
+          ./hetzner/jellyfin.nix
 
           home-manager.nixosModules.home-manager
           {
