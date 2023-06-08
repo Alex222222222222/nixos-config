@@ -26,5 +26,8 @@
       group = "root";
       mode = "600";
     };
+
+    hysteria-obfs.file = ./hysteria-obfs;
+    hysteria-alpn.file = ./hysteria-alpn;
   };
 }

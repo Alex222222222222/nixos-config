@@ -13,4 +13,6 @@ in
   "hetzner-webdav-secrets".publicKeys = systems ++ users;
   "cloudflare-email-api-key".publicKeys = systems ++ users;
   "v2ray-config".publicKeys = systems ++ users;
+  "hysteria-obfs".publicKeys = systems ++ users;
+  "hysteria-alpn".publicKeys = systems ++ users;
 }
