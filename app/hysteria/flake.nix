@@ -54,8 +54,10 @@
 
       nixosModules.with-cloudflare-acme = {pkgs, system, config, ... }:           
       let
+        a = pkgs.lib.trivial.throwIf (cfg.protocol != "udp" && cfg.protocol != "wechat-video" && cfg.protocol != "faketcp" && cfg.protocol != "") ''protocol must be "udp", "wechat-video", "faketcp". Empty = "udp"'';
         types = pkgs.lib.types;
         mkOption = pkgs.lib.options.mkOption;
+        cfg = config.services.hysteria;
       in
       {
         options.services.hysteria = {
@@ -84,18 +86,33 @@
             default = "huazifan@gmail.com";
             type = types.singleLineStr;
           };
+          socks5-outbound = {
+            server = mkOption {
+              default = "";
+              type = types.singleLineStr;
+            };
+            user = mkOption {
+              default = "";
+              type = types.singleLineStr;
+            };
+            password = mkOption {
+              default = "";
+              type = types.singleLineStr;
+            };
+          };
         };
-        config = pkgs.lib.mkIf config.services.hysteria.enable {
+        config = pkgs.lib.mkIf config.services.hysteria.enable{
           networking.firewall.allowedTCPPorts = [ config.services.hysteria.port ];
           networking.firewall.allowedUDPPorts = [ config.services.hysteria.port ];
           boot.kernel.sysctl."net.core.rmem_max" = 16777216;
           systemd.services.hysteria = {
-            environment.LOGGING_LEVEL = "warn";
+            environment.LOGGING_LEVEL = "info";
             serviceConfig = {
               User = "root";
               Group = "root";
               Restart = "always";
-              ExecStart = "${pkgs.bash}/bin/bash /etc/hysteria/run.sh";
+              ExecStartPre= "${pkgs.bash}/bin/bash /etc/hysteria/run.sh";
+              ExecStart = "${self.packages.${system}.default}/bin/hysteria -c /etc/hysteria/config.json server";
             };
           };
           security.acme = {
@@ -115,15 +132,34 @@
               ${pkgs.gnused}/bin/sed -i "s#{{ alpn }}#$alpn#" "$configFile"
               alpn=""
               obfs=""
-              ${self.packages.${system}.default}/bin/hysteria -c /etc/hysteria/config.json server
             '';
             mode = "0440";
             user = "root";
             group = "root";
           };
-          environment.etc."hysteria/config.json" = {
+          environment.etc."hysteria/config.json" = 
+          let
+            socks5-outbound = 
+            if (cfg.socks5-outbound.server != "") then
+              let
+                password = 
+                if (cfg.socks5-outbound.password != "") then ''"password": "${cfg.socks5-outbound.password}",'' else "";
+                user = 
+                if (cfg.socks5-outbound.user != "") then ''"user": "${cfg.socks5-outbound.user}",'' else "";
+              in
+              ''
+                "socks5_outbound": {
+                  ${user}
+                  ${password}
+                  "server": "${cfg.socks5-outbound.server}"
+                },
+              ''
+            else "";
+          in
+          {
             text = ''
               {
+                ${socks5-outbound}
                 "listen": ":${toString config.services.hysteria.port}", 
                 "protocol": "${config.services.hysteria.protocol}", 
                 "cert": "/var/lib/acme/${config.services.hysteria.domain}/cert.pem", 
