@@ -5,13 +5,6 @@
 { inputs, config, pkgs, system-stateVersion, system, ... }:
 
 {
-  imports =
-    [ 
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # <home-manager/nixos>
-    ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the GRUB 2 boot loader.
@@ -106,6 +99,14 @@
   # List services that you want to enable:
 
 
+  # clean journalctl
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
+    ];
+  };
+
 
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -114,6 +115,8 @@
     git
     ncdu
     tmux
+    htop
+    bandwhich
   ] ++ [
   ];
 

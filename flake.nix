@@ -59,6 +59,8 @@
         specialArgs = { inherit inputs pkgs system-stateVersion system; };
    
         modules = [
+          ./hetzner/hardware-configuration.nix
+
           ./hetzner/configuration.nix
           ./secrets/secrets-path.nix
           ./hetzner/hetzner-webdav.nix
