@@ -82,27 +82,28 @@
         specialArgs = { inherit inputs pkgs system-stateVersion system; };
    
         modules = [
-          ./hetzner/hardware-configuration.nix
+          ./machine/hetzner/hardware-configuration.nix
 
-          ./hetzner/tailscale.nix
-          ./hetzner/configuration.nix
           ./secrets/secrets-path.nix
-          ./hetzner/hetzner-webdav.nix
-          ./hetzner/networking.nix
-          ./hetzner/docker.nix
-          ./hetzner/cloudflare-warp-proxy.nix
-          ./hetzner/v2ray.nix
-          ./hetzner/freshrss.nix
-          ./hetzner/searxng/searxng.nix
 
+          ./machine/hetzner/configuration.nix
+          ./machine/hetzner/hetzner-webdav.nix
+          ./machine/hetzner/networking.nix
+          ./machine/hetzner/v2ray.nix
+          ./machine/hetzner/freshrss.nix
+          ./machine/hetzner/searxng/searxng.nix
+
+          ./app/cloudflare-warp-proxy/cloudflare-warp-proxy.nix
+          ./app/docker/docker.nix
+          ./app/tailscale/tailscale.nix
 
           agenix.nixosModules.default
 
           inputs.hysteria.nixosModules.with-cloudflare-acme
-          ./hetzner/hysteria.nix
+          ./machine/hetzner/hysteria.nix
 
           inputs.jellyfin.nixosModules.with-nginx-cloudlfare-acme
-          ./hetzner/jellyfin.nix
+          ./machine/hetzner/jellyfin.nix
 
           home-manager.nixosModules.home-manager
           {
