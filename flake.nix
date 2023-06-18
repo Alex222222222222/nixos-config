@@ -84,6 +84,7 @@
         modules = [
           ./hetzner/hardware-configuration.nix
 
+          ./hetzner/tailscale.nix
           ./hetzner/configuration.nix
           ./secrets/secrets-path.nix
           ./hetzner/hetzner-webdav.nix
