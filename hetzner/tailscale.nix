@@ -32,7 +32,7 @@
       # otherwise authenticate with tailscale
       # get the key from path/to/tailscale.key
       tailscale_key=$(cat ${config.age.secrets.tailscale-key.path})
-      ${tailscale}/bin/tailscale up -authkey $tailscale_key
+      ${tailscale}/bin/tailscale up --advertise-exit-node -authkey $tailscale_key
     '';
   };
 
