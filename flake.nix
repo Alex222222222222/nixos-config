@@ -44,6 +44,29 @@
   # 不过 self 是个例外，这个特殊参数指向 outputs 自身（自引用），以及 flake 根目录
   # 这里的 @ 语法将函数的参数 attribute set 取了个别名，方便在内部使用 
   outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
+    devShells = 
+      let
+        # System types to support.
+        supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+        # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+        forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+        # Nixpkgs instantiated for supported system types.
+        nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      in
+      forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          # The default package for 'nix build'. This makes sense if the
+          # flake provides only one package or there is a clear "main"
+          # package.
+          default = pkgs.mkShell {
+            buildInputs = [ inputs.agenix.packages.${system}.default ];
+          };
+        }
+      );
+    
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
     nixosConfigurations = {
