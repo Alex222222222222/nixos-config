@@ -30,10 +30,10 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    hysteria.url = "path:./app/hysteria";
+    hysteria.url = "github:Alex222222222222/nixos-config?dir=/app/hysteria";
     hysteria.inputs.nixpkgs.follows = "nixpkgs";
 
-    jellyfin.url = "path:./app/jellyfin";
+    jellyfin.url = "github:Alex222222222222/nixos-config?dir=/app/jellyfin";
     jellyfin.inputs.nixpkgs.follows = "nixpkgs";
   };
 

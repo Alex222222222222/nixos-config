@@ -29,5 +29,7 @@
 
     hysteria-obfs.file = ./hysteria-obfs;
     hysteria-alpn.file = ./hysteria-alpn;
+
+    tailscale-key.file = ./tailscale-key;
   };
 }

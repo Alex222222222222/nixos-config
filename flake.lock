@@ -92,14 +92,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-n8Q54oLTIDl0QgepQlvZ33VJ9Si8PGYU9hjSDszjlvY=",
-        "path": "./app/hysteria",
-        "type": "path"
+        "dir": "/app/hysteria",
+        "lastModified": 1686982453,
+        "narHash": "sha256-c7/s3kl1NFZfeB7FjRnwFr5MOcXVm06AMlFY9jRqVls=",
+        "owner": "Alex222222222222",
+        "repo": "nixos-config",
+        "rev": "5669070ad07aeb37227456ac3b4c7554752e1713",
+        "type": "github"
       },
       "original": {
-        "path": "./app/hysteria",
-        "type": "path"
+        "dir": "/app/hysteria",
+        "owner": "Alex222222222222",
+        "repo": "nixos-config",
+        "type": "github"
       }
     },
     "jellyfin": {
@@ -109,14 +114,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-qxPbzFcfnGYx6klDBJt56PfMUD4j5HC5druGOSi40GI=",
-        "path": "./app/jellyfin",
-        "type": "path"
+        "dir": "/app/jellyfin",
+        "lastModified": 1686982453,
+        "narHash": "sha256-c7/s3kl1NFZfeB7FjRnwFr5MOcXVm06AMlFY9jRqVls=",
+        "owner": "Alex222222222222",
+        "repo": "nixos-config",
+        "rev": "5669070ad07aeb37227456ac3b4c7554752e1713",
+        "type": "github"
       },
       "original": {
-        "path": "./app/jellyfin",
-        "type": "path"
+        "dir": "/app/jellyfin",
+        "owner": "Alex222222222222",
+        "repo": "nixos-config",
+        "type": "github"
       }
     },
     "nixpkgs": {

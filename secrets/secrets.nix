@@ -15,4 +15,5 @@ in
   "v2ray-config".publicKeys = systems ++ users;
   "hysteria-obfs".publicKeys = systems ++ users;
   "hysteria-alpn".publicKeys = systems ++ users;
+  "tailscale-key".publicKeys = systems ++ users;
 }
