@@ -36,6 +36,9 @@
     '';
   };
 
+  # enable ip forwarding, else the exit node won't work
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
   networking.firewall = {
     # enable the firewall
     enable = true;
@@ -43,5 +46,6 @@
     trustedInterfaces = [ "tailscale0" ];
     # allow the Tailscale UDP port through the firewall
     allowedUDPPorts = [ config.services.tailscale.port ];
+    allowedTCPPorts = [ config.services.tailscale.port ];
   };
 }
