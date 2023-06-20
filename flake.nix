@@ -85,6 +85,7 @@
           ./machine/hetzner/hardware-configuration.nix
 
           ./secrets/secrets-path.nix
+          agenix.nixosModules.default
 
           ./machine/hetzner/configuration.nix
           ./machine/hetzner/hetzner-webdav.nix
@@ -96,8 +97,6 @@
           ./app/cloudflare-warp-proxy/cloudflare-warp-proxy.nix
           ./app/docker/docker.nix
           ./app/tailscale/tailscale.nix
-
-          agenix.nixosModules.default
 
           inputs.hysteria.nixosModules.with-cloudflare-acme
           ./machine/hetzner/hysteria.nix
@@ -117,6 +116,30 @@
             # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
             home-manager.extraSpecialArgs = { inherit inputs pkgs system-stateVersion; };
           }
+        ];
+      };
+
+      racknerd =
+      let
+        system-stateVersion = "23.05";
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      nixpkgs.lib.nixosSystem {
+        system = system;
+
+        specialArgs = { inherit inputs pkgs system-stateVersion system; };
+
+        modules = [
+          ./secrets/secrets-path.nix
+          agenix.nixosModules.default
+
+          ./machine/racknerd/hardware-configuration.nix
+          ./machine/racknerd/configuration.nix
+          ./machine/racknerd/networking.nix
+          
+          ./app/docker/docker.nix
+          ./app/tailscale/tailscale.nix
         ];
       };
 
