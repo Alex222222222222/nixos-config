@@ -62,7 +62,10 @@
           # flake provides only one package or there is a clear "main"
           # package.
           default = pkgs.mkShell {
-            buildInputs = [ inputs.agenix.packages.${system}.default ];
+            buildInputs = [
+              inputs.agenix.packages.${system}.default
+              pkgs.tailscale
+            ];
           };
         }
       );

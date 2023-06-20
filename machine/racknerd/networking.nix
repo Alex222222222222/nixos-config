@@ -1,8 +1,10 @@
 {...}:
 {
   networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  
+  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.usePredictableInterfaceNames = false;
+  networking.dhcpcd.enable = true;
+
   networking.nameservers = [
     # google dns
     "8.8.8.8"
