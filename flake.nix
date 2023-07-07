@@ -97,7 +97,6 @@
           ./machine/hetzner/freshrss.nix
           ./machine/hetzner/searxng/searxng.nix
 
-          ./app/cloudflare-warp-proxy/cloudflare-warp-proxy.nix
           ./app/docker/docker.nix
           ./app/tailscale/tailscale.nix
 
