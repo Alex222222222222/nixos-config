@@ -13,5 +13,13 @@
         konsole
         plasma-browser-integration
         print-manager
+        spectacle
+        kwalletmanager
+    ];
+
+    environment.systemPackages = with pkgs; [
+        firefox
+        tigervnc
+        vlc
     ];
 }
