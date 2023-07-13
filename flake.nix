@@ -87,7 +87,7 @@
         modules = [
           ./machine/hetzner/hardware-configuration.nix
 
-          ./machine/hetzner/gnome.nix
+          ./machine/hetzner/kde.nix
 
           ./secrets/secrets-path.nix
           agenix.nixosModules.default

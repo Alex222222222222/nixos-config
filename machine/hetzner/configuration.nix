@@ -103,7 +103,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
+      "0 * * * * journalctl --vacuum-time=7d 1>/dev/null"
     ];
   };
 
