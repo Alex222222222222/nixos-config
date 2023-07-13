@@ -7,6 +7,7 @@
     environment.gnome.excludePackages = (with pkgs; [
         gnome-photos
         gnome-tour
+        xterm
     ]) ++ (with pkgs.gnome; [
         ghex # hex editor
         tali # poker game
@@ -31,6 +32,8 @@
         epiphany # web browser
         evince # document viewer
         gnome-characters
+        gnome-maps
+        gnome-contacts
     ]);
 
     systemd.sockets.terminal-server = { 
@@ -68,7 +71,7 @@
             StandardInput = "socket";
             StandardOutput = "socket";
             StandardError = "journal";
-            ExecStart = "@${pkgs.x11vnc}/bin/x11vnc x11vnc -inetd -display WAIT:1024x786:cmd=FINDCREATEDISPLAY-Xvfb.xdmcp -unixpw -ssl SAVE";
+            ExecStart = "@${pkgs.x11vnc}/bin/x11vnc -rfbport 5900";
             # Don't kill the X server when the user quits the VNC
             # connection.  FIXME: the X server should run in a
             # separate systemd session.
