@@ -146,6 +146,29 @@
         ];
       };
 
+      vultr =
+      let
+        system-stateVersion = "23.05";
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      nixpkgs.lib.nixosSystem {
+        system = system;
+
+        specialArgs = { inherit inputs pkgs system-stateVersion system; };
+
+        modules = [
+          ./secrets/secrets-path.nix
+          agenix.nixosModules.default
+
+          ./machine/vultr/hardware-configuration.nix
+          ./machine/vultr/configuration.nix
+          ./machine/vultr/networking.nix
+          
+          ./app/tailscale/tailscale.nix
+        ];
+      };
+
       # hostname 为 nixos-test 的主机会使用这个配置
       # 这里使用了 nixpkgs.lib.nixosSystem 函数来构建配置，后面的 attributes set 是它的参数
       # 在 nixos 系统上使用如下命令即可部署此配置：`nixos-rebuild switch --flake .#nixos-test`
