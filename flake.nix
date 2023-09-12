@@ -65,6 +65,7 @@
             buildInputs = [
               inputs.agenix.packages.${system}.default
               pkgs.tailscale
+              pkgs.unzip
             ];
           };
         }
