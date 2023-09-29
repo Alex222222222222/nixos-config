@@ -35,6 +35,11 @@
 
     jellyfin.url = "github:Alex222222222222/nixos-config?dir=/app/jellyfin";
     jellyfin.inputs.nixpkgs.follows = "nixpkgs";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # outputs 即 flake 的所有输出，其中的 nixosConfigurations 即 NixOS 系统配置
@@ -43,30 +48,77 @@
   # outputs 的参数都是 inputs 中定义的依赖项，可以通过它们的名称来引用。
   # 不过 self 是个例外，这个特殊参数指向 outputs 自身（自引用），以及 flake 根目录
   # 这里的 @ 语法将函数的参数 attribute set 取了个别名，方便在内部使用 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix, rust-overlay,... }@inputs: {
     devShells = 
       let
+        overlays = [ rust-overlay.overlay ];
         # System types to support.
         supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
         # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
         forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
         # Nixpkgs instantiated for supported system types.
-        nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+        nixpkgsFor = forAllSystems (system: import nixpkgs { inherit overlays system; });
       in
       forAllSystems (system:
         let
           pkgs = nixpkgsFor.${system};
+          commonBuildInputs = [
+              inputs.agenix.packages.${system}.default
+              pkgs.tailscale
+              pkgs.unzip
+              pkgs.git
+              pkgs.curl
+              pkgs.wget
+              pkgs.ncdu
+              pkgs.bandwhich
+              pkgs.vscode
+              pkgs.neovim
+          ];
+          commonShellHook = ''
+            export EDITOR=nvim
+            export VISUAL=nvim
+            export PATH=$PATH:$HOME/.local/bin
+          '';
+          rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         in
         {
           # The default package for 'nix build'. This makes sense if the
           # flake provides only one package or there is a clear "main"
           # package.
           default = pkgs.mkShell {
-            buildInputs = [
-              inputs.agenix.packages.${system}.default
-              pkgs.tailscale
-              pkgs.unzip
+            buildInputs = commonBuildInputs;
+            shellHook = commonShellHook;
+          };
+          ffmpeg = pkgs.mkShell {
+            buildInputs = commonBuildInputs ++ [
+              pkgs.ffmpeg-full
             ];
+            shellHook = commonShellHook;
+          };
+          latex = pkgs.mkShell {
+            buildInputs = commonBuildInputs ++ [
+              pkgs.texlive.combined.scheme-full
+            ];
+            shellHook = commonShellHook;
+          };
+          # Also see https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/
+          rust = pkgs.mkShell {
+            buildInputs = commonBuildInputs ++ [
+              pkgs.rust-analyzer
+              pkgs.rustfmt
+              # pkgs.cargo
+              # pkgs.rustc
+              # pkgs.nodePackages_latest.tailwindcss
+              pkgs.cargo-tauri
+              pkgs.trunk
+              # pkgs.rustup
+              pkgs.wasm-bindgen-cli
+              pkgs.wasm-pack
+              pkgs.binaryen
+              pkgs.protobuf
+              rust
+            ];
+            shellHook = commonShellHook;
           };
         }
       );
