@@ -73,6 +73,7 @@
               pkgs.bandwhich
               pkgs.vscode
               pkgs.neovim
+              pkgs.smartmontools
           ];
           commonShellHook = ''
             export EDITOR=nvim
@@ -80,6 +81,10 @@
             export PATH=$PATH:$HOME/.local/bin
           '';
           rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+	   
+	  R-with-my-packages = pkgs.rWrapper.override{
+            packages = with pkgs.rPackages; [ ggplot2 dplyr xts ]; 
+          };
         in
         {
           # The default package for 'nix build'. This makes sense if the
@@ -120,6 +125,14 @@
             ];
             shellHook = commonShellHook;
           };
+	  R = pkgs.mkShell {
+	    buildInputs = commonBuildInputs ++ [
+	      R-with-my-packages
+	      pkgs.pandoc
+	      pkgs.texlive.combined.scheme-full
+	    ];
+	    shellHook = commonShellHook;
+	  };
         }
       );
     
