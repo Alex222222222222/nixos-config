@@ -61,6 +61,8 @@
       in
       forAllSystems (system:
         let
+          inherit (pkgs.stdenv) isLinux;
+
           pkgs = nixpkgsFor.${system};
           commonBuildInputs = [
               inputs.agenix.packages.${system}.default
@@ -80,9 +82,56 @@
             export VISUAL=nvim
             export PATH=$PATH:$HOME/.local/bin
           '';
-          rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
-	   
-	  R-with-my-packages = pkgs.rWrapper.override{
+
+          rust-toolchain = pkgs.rust-bin.nightly.latest.default.override {
+            extensions = ["rust-analyzer" "rust-src" "rust-std"];
+            targets = ["wasm32-unknown-unknown"];
+          };
+
+          rust-packages-linux = with pkgs; [
+            rust-toolchain
+            nodejs-18_x
+            nodePackages.pnpm
+            pkg-config
+            gtk3
+            webkitgtk
+            libayatana-appindicator.dev
+            alsa-lib.dev
+          ];
+          rust-packages-darwin = with pkgs; [
+            rust-toolchain
+            nodejs-18_x
+            nodePackages.pnpm
+            curl
+            wget
+            pkg-config
+            libiconv
+            darwin.apple_sdk.frameworks.Security
+            darwin.apple_sdk.frameworks.CoreServices
+            darwin.apple_sdk.frameworks.CoreFoundation
+            darwin.apple_sdk.frameworks.Foundation
+            darwin.apple_sdk.frameworks.AppKit
+            darwin.apple_sdk.frameworks.WebKit
+            darwin.apple_sdk.frameworks.Cocoa
+          ];
+          rust-packages =
+            if isLinux
+            then rust-packages-linux
+            else rust-packages-darwin;
+          rust-packages-with-my-packages = commonBuildInputs ++ rust-packages ++ [
+            pkgs.rust-analyzer
+            pkgs.rustfmt
+            pkgs.cargo-tauri
+            pkgs.trunk
+            pkgs.wasm-bindgen-cli
+            pkgs.wasm-pack
+            pkgs.binaryen
+            pkgs.protobuf
+            rust-toolchain
+            pkgs.nodePackages_latest.tailwindcss
+          ] ++ rust-packages;
+          
+	        R-with-my-packages = pkgs.rWrapper.override{
             packages = with pkgs.rPackages; [ ggplot2 dplyr xts ]; 
           };
         in
@@ -108,31 +157,17 @@
           };
           # Also see https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/
           rust = pkgs.mkShell {
+            buildInputs = rust-packages-with-my-packages;
+            shellHook = commonShellHook;
+          };
+          R = pkgs.mkShell {
             buildInputs = commonBuildInputs ++ [
-              pkgs.rust-analyzer
-              pkgs.rustfmt
-              # pkgs.cargo
-              # pkgs.rustc
-              # pkgs.nodePackages_latest.tailwindcss
-              pkgs.cargo-tauri
-              pkgs.trunk
-              # pkgs.rustup
-              pkgs.wasm-bindgen-cli
-              pkgs.wasm-pack
-              pkgs.binaryen
-              pkgs.protobuf
-              rust
+              R-with-my-packages
+              pkgs.pandoc
+              pkgs.texlive.combined.scheme-full
             ];
             shellHook = commonShellHook;
           };
-	  R = pkgs.mkShell {
-	    buildInputs = commonBuildInputs ++ [
-	      R-with-my-packages
-	      pkgs.pandoc
-	      pkgs.texlive.combined.scheme-full
-	    ];
-	    shellHook = commonShellHook;
-	  };
         }
       );
     
