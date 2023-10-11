@@ -76,6 +76,7 @@
               pkgs.vscode
               pkgs.neovim
               pkgs.smartmontools
+              pkgs.zstd
           ];
           commonShellHook = ''
             export EDITOR=nvim
