@@ -1,31 +1,33 @@
-{inputs, nixpkgs, ...}:
+{ inputs, nixpkgs, ... }:
 let
   overlays = [ inputs.rust-overlay.overlay ];
   # System types to support.
-  supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+  supportedSystems =
+    [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
   # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
   forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
   # Nixpkgs instantiated for supported system types.
-  nixpkgsFor = forAllSystems (system: import nixpkgs { inherit overlays system; });
-in
-forAllSystems (system:
+  nixpkgsFor =
+    forAllSystems (system: import nixpkgs { inherit overlays system; });
+in forAllSystems (system:
   let
     inherit (pkgs.stdenv) isLinux;
 
     pkgs = nixpkgsFor.${system};
     commonBuildInputs = [
-        inputs.agenix.packages.${system}.default
-        pkgs.tailscale
-        pkgs.unzip
-        pkgs.git
-        pkgs.curl
-        pkgs.wget
-        pkgs.ncdu
-        pkgs.bandwhich
-        pkgs.vscode
-        pkgs.neovim
-        pkgs.smartmontools
-        pkgs.zstd
+      inputs.agenix.packages.${system}.default
+      pkgs.tailscale
+      pkgs.unzip
+      pkgs.git
+      pkgs.curl
+      pkgs.wget
+      pkgs.ncdu
+      pkgs.bandwhich
+      pkgs.vscode
+      pkgs.neovim
+      pkgs.smartmontools
+      pkgs.zstd
+      pkgs.nixfmt
     ];
     commonShellHook = ''
       export EDITOR=nvim
@@ -34,8 +36,8 @@ forAllSystems (system:
     '';
 
     rust-toolchain = pkgs.rust-bin.nightly.latest.default.override {
-      extensions = ["rust-analyzer" "rust-src" "rust-std"];
-      targets = ["wasm32-unknown-unknown"];
+      extensions = [ "rust-analyzer" "rust-src" "rust-std" ];
+      targets = [ "wasm32-unknown-unknown" ];
     };
 
     rust-packages-linux = with pkgs; [
@@ -65,9 +67,7 @@ forAllSystems (system:
       darwin.apple_sdk.frameworks.Cocoa
     ];
     rust-packages =
-      if isLinux
-      then rust-packages-linux
-      else rust-packages-darwin;
+      if isLinux then rust-packages-linux else rust-packages-darwin;
     rust-packages-with-my-packages = commonBuildInputs ++ rust-packages ++ [
       pkgs.rust-analyzer
       pkgs.rustfmt
@@ -80,12 +80,11 @@ forAllSystems (system:
       rust-toolchain
       pkgs.nodePackages_latest.tailwindcss
     ] ++ rust-packages;
-    
-    R-with-my-packages = pkgs.rWrapper.override{
-      packages = with pkgs.rPackages; [ ggplot2 dplyr xts ]; 
+
+    R-with-my-packages = pkgs.rWrapper.override {
+      packages = with pkgs.rPackages; [ ggplot2 dplyr xts ];
     };
-  in
-  {
+  in {
     # The default package for 'nix build'. This makes sense if the
     # flake provides only one package or there is a clear "main"
     # package.
@@ -94,15 +93,11 @@ forAllSystems (system:
       shellHook = commonShellHook;
     };
     ffmpeg = pkgs.mkShell {
-      buildInputs = commonBuildInputs ++ [
-        pkgs.ffmpeg-full
-      ];
+      buildInputs = commonBuildInputs ++ [ pkgs.ffmpeg-full ];
       shellHook = commonShellHook;
     };
     latex = pkgs.mkShell {
-      buildInputs = commonBuildInputs ++ [
-        pkgs.texlive.combined.scheme-full
-      ];
+      buildInputs = commonBuildInputs ++ [ pkgs.texlive.combined.scheme-full ];
       shellHook = commonShellHook;
     };
     # Also see https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/
@@ -111,12 +106,8 @@ forAllSystems (system:
       shellHook = commonShellHook;
     };
     R = pkgs.mkShell {
-      buildInputs = commonBuildInputs ++ [
-        R-with-my-packages
-        pkgs.pandoc
-        pkgs.texlive.combined.scheme-full
-      ];
+      buildInputs = commonBuildInputs
+        ++ [ R-with-my-packages pkgs.pandoc pkgs.texlive.combined.scheme-full ];
       shellHook = commonShellHook;
     };
-  }
-)
+  })
