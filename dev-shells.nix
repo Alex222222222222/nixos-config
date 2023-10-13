@@ -39,7 +39,6 @@ in forAllSystems (system:
       extensions = [ "rust-analyzer" "rust-src" "rust-std" ];
       targets = [ "wasm32-unknown-unknown" ];
     };
-
     rust-packages-linux = with pkgs; [
       rust-toolchain
       nodejs-18_x
@@ -84,6 +83,18 @@ in forAllSystems (system:
     R-with-my-packages = pkgs.rWrapper.override {
       packages = with pkgs.rPackages; [ ggplot2 dplyr xts ];
     };
+
+    python = [
+      (pkgs.python3.withPackages (ps: [ 
+        ps.matplotlib
+        ps.numpy
+        ps.pandas
+        ps.scipy
+       ]))
+
+      pkgs.curl
+      pkgs.jq
+    ];
   in {
     # The default package for 'nix build'. This makes sense if the
     # flake provides only one package or there is a clear "main"
@@ -108,6 +119,10 @@ in forAllSystems (system:
     R = pkgs.mkShell {
       buildInputs = commonBuildInputs
         ++ [ R-with-my-packages pkgs.pandoc pkgs.texlive.combined.scheme-full ];
+      shellHook = commonShellHook;
+    };
+    python = pkgs.mkShell {
+      buildInputs = commonBuildInputs ++ python;
       shellHook = commonShellHook;
     };
   })
