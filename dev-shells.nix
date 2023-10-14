@@ -28,6 +28,8 @@ in forAllSystems (system:
       pkgs.smartmontools
       pkgs.zstd
       pkgs.nixfmt
+      pkgs.sqlite
+      pkgs.tokei
     ];
     commonShellHook = ''
       export EDITOR=nvim
