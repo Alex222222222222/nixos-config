@@ -30,6 +30,7 @@ in forAllSystems (system:
       pkgs.nixfmt
       pkgs.sqlite
       pkgs.tokei
+      pkgs.mosh
     ];
     commonShellHook = ''
       export EDITOR=nvim
