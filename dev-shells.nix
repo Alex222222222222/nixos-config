@@ -31,6 +31,9 @@ in forAllSystems (system:
       pkgs.sqlite
       pkgs.tokei
       pkgs.mosh
+      pkgs.rclone
+      pkgs.docker
+      pkgs.heroku
     ];
     commonShellHook = ''
       export EDITOR=nvim
@@ -98,6 +101,11 @@ in forAllSystems (system:
       pkgs.curl
       pkgs.jq
     ];
+
+    nextjs = [
+      pkgs.nodejs_20
+      pkgs.nodePackages.npm
+    ];
   in {
     # The default package for 'nix build'. This makes sense if the
     # flake provides only one package or there is a clear "main"
@@ -126,6 +134,10 @@ in forAllSystems (system:
     };
     python = pkgs.mkShell {
       buildInputs = commonBuildInputs ++ python;
+      shellHook = commonShellHook;
+    };
+    nextjs = pkgs.mkShell{
+      buildInputs = commonBuildInputs ++ nextjs;
       shellHook = commonShellHook;
     };
   })
