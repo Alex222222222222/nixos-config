@@ -2,7 +2,7 @@
 {
   services.postgresql = {
     settings = {
-      listen_addresses = '\*';
+      listen_addresses = "*";
     };
     enable = true;
     ensureDatabases = [ "freshrss" ];
