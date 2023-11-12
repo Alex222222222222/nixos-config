@@ -33,7 +33,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 0 * * * root ${pkgs.rsync} /var/backup/postgresql/ /mnt/hetzner/Backup/postgresql"
+      "0 0 * * * root ${pkgs.rsync} -r /var/backup/postgresql/ /mnt/hetzner/Backup/postgresql"
     ];
   };
 
