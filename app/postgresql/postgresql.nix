@@ -18,6 +18,7 @@
       host all       all     ::1/128        trust
       # freshrss
       host freshrss freshrss 0.0.0.0/0 scram-sha-256
+      100.111.211.153 freshrss freshrss 0.0.0.0/0 scram-sha-256
     '';
     initialScript = "/etc/postgresql/initial_script";
   };
