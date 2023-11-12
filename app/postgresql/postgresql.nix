@@ -1,6 +1,9 @@
 {config, pkgs, ...}:
 {
   services.postgresql = {
+    settings = {
+      listen_addresses = '*';
+    };
     enable = true;
     ensureDatabases = [ "freshrss" ];
     enableTCPIP = true;
@@ -18,7 +21,7 @@
     initialScript = "/etc/postgresql/initial_script";
   };
 
-  system.activationScripts."dex-user-secret" = ''
+  system.activationScripts."postgresql_database_secret" = ''
     secret=$(cat "${config.age.secrets.postgresql-freshrss-pass.path}")
     configFile=/etc/postgresql/initial_script
     ${pkgs.gnused}/bin/sed -i "s#@{{ FRESH_RSS_PASS }}@#$secret#" "$configFile"

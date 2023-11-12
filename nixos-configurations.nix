@@ -23,24 +23,4 @@ in {
       ./app/postgresql/postgresql.nix
     ];
   };
-
-  vultr = let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in nixpkgs.lib.nixosSystem {
-    system = system;
-
-    specialArgs = { inherit inputs pkgs system-stateVersion system; };
-
-    modules = [
-      ./secrets/secrets-path.nix
-      agenix.nixosModules.default
-
-      ./machine/vultr/hardware-configuration.nix
-      ./machine/vultr/configuration.nix
-      ./machine/vultr/networking.nix
-
-      ./app/tailscale/tailscale.nix
-    ];
-  };
 }
