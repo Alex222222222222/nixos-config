@@ -25,7 +25,7 @@
   system.activationScripts."postgresql_database_secret" = ''
     secret=$(cat "${config.age.secrets.postgresql-freshrss-pass.path}")
     configFile=/etc/postgresql/initial_script
-    ${pkgs.gnused}/bin/sed -i "s#@{{ FRESH_RSS_PASS }}@#$secret#" "$configFile"
+    ${pkgs.gnused}/bin/sed -i "s#{{ FRESH_RSS_PASS }}#$secret#" "$configFile"
   '';
 
   environment.etc = {
@@ -36,7 +36,8 @@
         CREATE DATABASE freshrss;
         GRANT ALL PRIVILEGES ON DATABASE freshrss TO freshrss;
       '';
-
+      user = "postgres";
+      group = "postgres";
       # The UNIX file mode bits
       mode = "0440";
     };
