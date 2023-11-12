@@ -27,4 +27,5 @@ in
   "hysteria-alpn".publicKeys = systems ++ users;
   "tailscale-key".publicKeys = systems ++ users;
   "postgresql-freshrss-pass".publicKeys = systems ++ users;
+  "cloudme-webdav-secrets".publicKeys = systems ++ users;
 }

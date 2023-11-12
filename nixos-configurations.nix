@@ -21,6 +21,8 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/postgresql/postgresql.nix
+
+      ./app/webdav/cloudme.nix
     ];
   };
 }

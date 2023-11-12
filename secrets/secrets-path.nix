@@ -33,5 +33,7 @@
     tailscale-key.file = ./tailscale-key;
     
     postgresql-freshrss-pass.file = ./postgresql-freshrss-pass;
+
+    cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
   };
 }
