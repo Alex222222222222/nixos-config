@@ -25,7 +25,7 @@
   services.postgresqlBackup = {
     enable = true;
     backupAll = true;
-    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}"
+    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
   };
 
   # Enable cron service
