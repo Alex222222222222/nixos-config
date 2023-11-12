@@ -25,14 +25,14 @@
   services.postgresqlBackup = {
     enable = true;
     backupAll = true;
-    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
+    location = "/var/backup/postgresql";
   };
 
   # Enable cron service
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 0 * * * root ${pkgs.rsync} /var/lib/postgresql/${config.services.postgresql.package.psqlSchema}/ /mnt/hetzner/Backup/postgresql"
+      "0 0 * * * root ${pkgs.rsync} /var/backup/postgresql/ /mnt/hetzner/Backup/postgresql"
     ];
   };
 
