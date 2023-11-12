@@ -31,5 +31,7 @@
     hysteria-alpn.file = ./hysteria-alpn;
 
     tailscale-key.file = ./tailscale-key;
+    
+    postgresql-freshrss-pass.file = ./postgresql-freshrss-pass;
   };
 }

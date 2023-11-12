@@ -26,4 +26,5 @@ in
   "hysteria-obfs".publicKeys = systems ++ users;
   "hysteria-alpn".publicKeys = systems ++ users;
   "tailscale-key".publicKeys = systems ++ users;
+  "postgresql-freshrss-pass".publicKeys = systems ++ users;
 }
