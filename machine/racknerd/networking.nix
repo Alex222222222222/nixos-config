@@ -50,8 +50,8 @@
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 23 80 443 53 ];
-  networking.firewall.allowedUDPPorts = [ 22 23 80 443 53 ];
+  networking.firewall.allowedTCPPorts = [ 22 23 80 443 53 5332 ];
+  networking.firewall.allowedUDPPorts = [ 22 23 80 443 53 5332 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
@@ -63,7 +63,6 @@
       "10.0.0.0/8" 
       "172.16.0.0/12" 
       "192.168.0.0/16"
-      "8.8.8.8"
     ];
   };
 }
