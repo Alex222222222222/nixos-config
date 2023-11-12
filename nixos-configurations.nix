@@ -22,7 +22,7 @@ in {
 
       ./app/postgresql/postgresql.nix
 
-      ./app/webdav/cloudme.nix
+      ./app/webdav/hetzner.nix
     ];
   };
 }

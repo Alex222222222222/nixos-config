@@ -22,6 +22,20 @@
     initialScript = "/etc/postgresql/initial_script";
   };
 
+  services.postgresqlBackup = {
+    enable = true;
+    backupAll = true;
+    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}"
+  };
+
+  # Enable cron service
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * * root ${pkgs.rsync} /var/lib/postgresql/${config.services.postgresql.package.psqlSchema}/ /mnt/hetzner/Backup/postgresql"
+    ];
+  };
+
   system.activationScripts."postgresql_database_secret" = ''
     secret=$(cat "${config.age.secrets.postgresql-freshrss-pass.path}")
     configFile=/etc/postgresql/initial_script
