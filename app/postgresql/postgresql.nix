@@ -24,8 +24,9 @@
 
   services.postgresqlBackup = {
     enable = true;
-    backupAll = true;
+    databases = [ "freshrss" ];
     location = "/var/backup/postgresql";
+    pgdumpOptions = "-C --port=5332";
   };
 
   # Enable cron service
