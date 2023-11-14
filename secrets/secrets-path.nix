@@ -36,6 +36,11 @@
 
     cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
 
-    freshrss_tunnel_token.file = ./freshrss_tunnel_token;
+    freshrss_tunnel_token = {
+      file = ./freshrss_tunnel_token;
+      owner = "cloudflared";
+      group = "cloudflared";
+      mode = "600";
+    };
   };
 }
