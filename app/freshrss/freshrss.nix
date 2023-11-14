@@ -25,6 +25,8 @@
     serviceConfig = {
       ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$(cat ${config.age.secrets.freshrss_tunnel_token.path})";
       Restart = "always";
+      User = "root";
+      Group = "root";
     };
   };
 }
