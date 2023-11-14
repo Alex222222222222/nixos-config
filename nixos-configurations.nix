@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, home-manager, agenix, rust-overlay, pkgs, ... }:
+{ inputs, nixpkgs, home-manager, agenix, rust-overlay, ... }:
 let system-stateVersion = "23.05";
 in {
   racknerd = let
