@@ -23,6 +23,8 @@ in {
       ./app/postgresql/postgresql.nix
 
       ./app/webdav/hetzner.nix
+
+      ./app/freshrss/freshrss.nix
     ];
   };
 }

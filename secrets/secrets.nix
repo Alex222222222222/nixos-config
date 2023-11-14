@@ -28,4 +28,5 @@ in
   "tailscale-key".publicKeys = systems ++ users;
   "postgresql-freshrss-pass".publicKeys = systems ++ users;
   "cloudme-webdav-secrets".publicKeys = systems ++ users;
+  "freshrss_tunnel_token".publicKeys = systems ++ users;
 }

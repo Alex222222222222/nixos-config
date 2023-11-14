@@ -35,5 +35,7 @@
     postgresql-freshrss-pass.file = ./postgresql-freshrss-pass;
 
     cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
+
+    freshrss_tunnel_token.file = ./freshrss_tunnel_token;
   };
 }

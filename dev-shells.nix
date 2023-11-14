@@ -34,6 +34,8 @@ in forAllSystems (system:
       pkgs.rclone
       pkgs.docker
       pkgs.heroku
+      pkgs.google-cloud-sdk
+      pkgs.awscli2
     ];
     commonShellHook = ''
       export EDITOR=nvim
