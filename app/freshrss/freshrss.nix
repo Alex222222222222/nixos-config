@@ -18,6 +18,12 @@
     };
   };
 
+  users.users.cloudflared = {
+    group = "cloudflared";
+    isSystemUser = true;
+  };
+  users.groups.cloudflared = { };
+
   system.activationScripts."freshrss_cloudflare_tunnel_token" = ''
     secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
     configFile=/etc/freshrss/freshrss_cloudflare_tunnel
