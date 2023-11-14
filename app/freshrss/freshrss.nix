@@ -18,12 +18,6 @@
     };
   };
 
-  users.users.cloudflared = {
-    group = "cloudflared";
-    isSystemUser = true;
-  };
-  users.groups.cloudflared = { };
-
   systemd.services.freshrss_tunnel = {
     description = "Cloudflare Tunnel for Selfhosted FreshRSS";
     wantedBy = [ "multi-user.target" ];
@@ -31,8 +25,6 @@
     serviceConfig = {
       ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$(cat ${config.age.secrets.freshrss_tunnel_token.path})";
       Restart = "always";
-      User = "cloudflared";
-      Group = "cloudflared";
     };
   };
 }
