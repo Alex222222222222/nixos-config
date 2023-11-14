@@ -20,7 +20,7 @@
 
   system.activationScripts."freshrss_cloudflare_tunnel_token" = ''
     secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
-    configFile=/etc/postgresql/initial_script
+    configFile=/etc/freshrss/freshrss_cloudflare_tunnel
     ${pkgs.gnused}/bin/sed -i "s#{{ FRESH_RSS_PASS }}#$secret#" "$configFile"
   '';
 
