@@ -42,7 +42,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
-      ExecStart = "/etc/freshrss/freshrss_cloudflare_tunnel";
+      ExecStart = "${pkgs.bash}/bin/bash /etc/freshrss/freshrss_cloudflare_tunnel";
       Restart = "always";
       User = "cloudflared";
       Group = "cloudflared";
