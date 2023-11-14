@@ -18,15 +18,34 @@
     };
   };
 
+  system.activationScripts."freshrss_cloudflare_tunnel_token" = ''
+    secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
+    configFile=/etc/postgresql/initial_script
+    ${pkgs.gnused}/bin/sed -i "s#{{ FRESH_RSS_PASS }}#$secret#" "$configFile"
+  '';
+
+  environment.etc = {
+    # Creates /etc/nanorc
+    "freshrss/freshrss_cloudflare_tunnel" = {
+      text = ''
+        ${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token={{ FRESH_RSS_PASS }})
+      '';
+      user = "cloudflared";
+      group = "cloudflared";
+      # The UNIX file mode bits
+      mode = "0440";
+    };
+  };
+
   systemd.services.freshrss_tunnel = {
     description = "Cloudflare Tunnel for Selfhosted FreshRSS";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
-      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$(cat ${config.age.secrets.freshrss_tunnel_token.path})";
+      ExecStart = "/etc/freshrss/freshrss_cloudflare_tunnel";
       Restart = "always";
-      User = "root";
-      Group = "root";
+      User = "cloudflared";
+      Group = "cloudflared";
     };
   };
 }
