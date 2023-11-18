@@ -44,9 +44,9 @@ in {
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
 
-      ./machine/server-factory /hardware-configuration.nix
-      ./machine/server-factory /configuration.nix
-      ./machine/server-factory /networking.nix
+      ./machine/server-factory/hardware-configuration.nix
+      ./machine/server-factory/configuration.nix
+      ./machine/server-factory/networking.nix
 
       ./app/docker/docker.nix
       ./app/tailscale/tailscale.nix
