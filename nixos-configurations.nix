@@ -49,7 +49,7 @@ in {
     modules = [
       {
         nixpkgs.config.allowUnsupportedSystem = true;
-        nixpkgs.crossSystem.system = system;
+        # nixpkgs.crossSystem.system = system;
         nixpkgs.hostPlatform.system = system;
         nixpkgs.buildPlatform.system = build_platform; #If you build on x86 other wise changes this.
         # ... extra configs as above
