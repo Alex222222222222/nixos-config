@@ -56,6 +56,8 @@
     };
 
     # images
-    images = import ./images.nix { inherit inputs nixpkgs; };
+    images = {
+      orangePiZero2 = nixosConfigurations.orangePiZero2.config.system.build.sdImage;
+    };
   };
 }
