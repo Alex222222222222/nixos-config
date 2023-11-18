@@ -30,7 +30,7 @@ let
     "2a01:4f8:c2c:123f:69::1"
     "2a00:1098:2b:0:69::1"
     "2a01:4f9:c010:3f02:69::1"
-  ]
+  ];
 
   nameservers = if ipv6_only then nat64 else nat64 ++ [
     "8.8.8.8"
