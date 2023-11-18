@@ -33,7 +33,7 @@ in {
   };
 
   orangePiZero2 = let
-    system = "arrch64-linux";
+    system = "aarch64-linux";
     build_platform = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     ipv6_only = false;
