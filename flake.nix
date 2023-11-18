@@ -46,7 +46,7 @@
   # outputs 的参数都是 inputs 中定义的依赖项，可以通过它们的名称来引用。
   # 不过 self 是个例外，这个特殊参数指向 outputs 自身（自引用），以及 flake 根目录
   # 这里的 @ 语法将函数的参数 attribute set 取了个别名，方便在内部使用 
-  outputs = { self, nixpkgs, home-manager, agenix, rust-overlay, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix, rust-overlay, ... }@inputs: rec {
     devShells = import ./dev-shells.nix { inherit inputs nixpkgs; };
 
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
