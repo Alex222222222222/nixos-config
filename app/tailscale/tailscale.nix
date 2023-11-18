@@ -39,6 +39,7 @@
   # enable ip forwarding, else the exit node won't work
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot.kernel.sysctl."net.ipv6.ip_forward" = 1;
+  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = 1;
 
   networking.firewall = {
     # enable the firewall
