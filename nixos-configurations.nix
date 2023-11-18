@@ -32,6 +32,53 @@ in {
     ];
   };
 
+  orangePiZero2 = let
+    system = "arrch64-linux";
+    build_platform = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    ipv6_only = false;
+      compressImage = true;     # Set to false to disable image compressing
+  in
+  nixpkgs.lib.nixosSystem {
+    system = system;
+
+    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only nixpkgs; };
+
+    modules = [
+      {
+        nixpkgs.config.allowUnsupportedSystem = true;
+        nixpkgs.crossSystem.system = system;
+        nixpkgs.hostPlatform.system = system;
+        nixpkgs.buildPlatform.system = build_platform; #If you build on x86 other wise changes this.
+        # ... extra configs as above
+
+        sdImage = {
+          postBuildCommands = ''
+            # Emplace bootloader to specific place in firmware file
+            dd if=${bootloaderPackage}${bootloaderSubpath} of=$img    \
+              bs=8 seek=1024                                          \
+              conv=notrunc # prevent truncation of image
+          '';
+          inherit compressImage;
+        };
+      }
+
+      # Default aarch64 SOC System
+      "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+      # Minimal configuration
+      "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+
+      ./app/ssh-keys.nix
+      ./app/nameservers.nix
+
+      ./secrets/secrets-path.nix
+      agenix.nixosModules.default
+
+      ./machine/orangepizero2/configuration.nix
+      ./machine/orangepizero2/networking.nix
+    ];
+  };
+
   serverfactory = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};

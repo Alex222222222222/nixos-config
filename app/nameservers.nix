@@ -32,7 +32,7 @@ let
     "2a01:4f9:c010:3f02:69::1"
   ];
 
-  nameservers = if ipv6_only then nat64 else nat64 ++ [
+  ipv4_only = [
     "8.8.8.8"
     "8.8.4.4"
     "2001:4860:4860::8888"
@@ -52,6 +52,8 @@ let
     "2606:4700:4700::1113"
     "2606:4700:4700::1003"
   ];
+
+  nameservers = if ipv6_only then nat64 else ipv4_only;
 in
 {
   networking.nameservers = nameservers;
