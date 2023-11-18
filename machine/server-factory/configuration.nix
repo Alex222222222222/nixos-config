@@ -7,20 +7,12 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -28,13 +20,9 @@
   users.users.zifan = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    openssh.authorizedKeys.keys = [
-      "${builtins.readFile ./key}"
-    ];
   };
-  users.users.root.openssh.authorizedKeys.keys = [
-    "${builtins.readFile ./key}"
-  ];
+
+  # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -46,33 +34,19 @@
     bandwhich
   ];
 
-  networking = {
-    dhcpcd.enable = false;
-    # usePredictableInterfaceNames = false;
-    interfaces = {
-      eth0.ipv6.addresses = [{
-        address = "2a07:e042:1:b4::1";
-        prefixLength = 32;
-      }];
-    };
-    defaultGateway6 = {
-      address = "2a07:e042::1";
-      interface = "eth0"; 
-    };
-    nameservers = [
-      "2001:67c:2b0::4"
-      "2001:67c:2b0::6"
-      "2a01:4f9:c010:3f02::1"
-      "2a00:1098:32c:1"
+  # clean journalctl
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
     ];
-    firewall.enable = false;
   };
 
-  services.openssh.enable = true;
-  programs.mosh.enable = true;
+  # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F
+  nix.gc.automatic = true;
+  nix.settings.auto-optimise-store = true;
 
-
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = system-stateVersion; # Did you read the comment?
 
 }
 
