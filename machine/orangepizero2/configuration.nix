@@ -3,6 +3,18 @@ let
   # configure for cross compilation on linux
   # pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform;
   # pkgs = nixpkgs.legacyPackages.${system};
+  filesystems = pkgs.lib.mkForce [
+    "btrfs"
+    "reiserfs"
+    "vfat"
+    "f2fs"
+    "xfs"
+    "ntfs"
+    "cifs"
+    /* "zfs" */
+    "ext4"
+    "vfat"
+  ];
 in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -99,17 +111,6 @@ in {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # Disable ZFS support to prevent problems with fresh kernels.
-  boot.supportedFilesystems =  pkgs.lib.mkForce [
-    "btrfs"
-    "reiserfs"
-    "vfat"
-    "f2fs"
-    "xfs"
-    "ntfs"
-    "cifs"
-    /* "zfs" */
-    "ext4"
-    "vfat"
-  ];
+  boot.supportedFilesystems = filesystems
   boot.initrd.supportedFilesystems = filesystems;
 }
