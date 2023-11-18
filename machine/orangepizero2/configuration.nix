@@ -1,10 +1,8 @@
 {nixpkgs, inputs, config, pkgs, system-stateVersion, system,...}:
 let
-  bootloaderPackage = pkgs.ubootOrangePiZero2;
-  bootloaderSubpath = "/u-boot-sunxi-with-spl.bin";
-
   # configure for cross compilation on linux
-  pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform;
+  # pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform;
+  # pkgs = nixpkgs.legacyPackages.${system};
 in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

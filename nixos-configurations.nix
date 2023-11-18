@@ -37,7 +37,9 @@ in {
     build_platform = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     ipv6_only = false;
-      compressImage = true;     # Set to false to disable image compressing
+    compressImage = true;     # Set to false to disable image compressing
+    bootloaderPackage = pkgs.ubootOrangePiZero2;
+    bootloaderSubpath = "/u-boot-sunxi-with-spl.bin";
   in
   nixpkgs.lib.nixosSystem {
     system = system;
