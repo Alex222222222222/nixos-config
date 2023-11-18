@@ -30,7 +30,7 @@ in {
     ];
   };
 
-  server-factory = let
+  serverfactory = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in nixpkgs.lib.nixosSystem {
