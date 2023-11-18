@@ -52,7 +52,7 @@ let
     "2606:4700:4700::1113"
     "2606:4700:4700::1003"
   ];
-
+in
 {
   networking.nameservers = nameservers;
 }
