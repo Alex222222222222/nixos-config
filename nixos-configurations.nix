@@ -11,6 +11,7 @@ in {
 
     modules = [
       ./app/ssh-keys.nix
+      ./app/nameservers.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
@@ -40,6 +41,7 @@ in {
 
     modules = [
       ./app/ssh-keys.nix
+      ./app/nameservers.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
