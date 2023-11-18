@@ -111,6 +111,6 @@ in {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # Disable ZFS support to prevent problems with fresh kernels.
-  boot.supportedFilesystems = filesystems
+  boot.supportedFilesystems = filesystems;
   boot.initrd.supportedFilesystems = filesystems;
 }
