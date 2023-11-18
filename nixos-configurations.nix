@@ -4,10 +4,11 @@ in {
   racknerd = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    ipv6_only = false;
   in nixpkgs.lib.nixosSystem {
     system = system;
 
-    specialArgs = { inherit inputs pkgs system-stateVersion system; };
+    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
       ./app/ssh-keys.nix
@@ -34,10 +35,11 @@ in {
   serverfactory = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    ipv6_only = true;
   in nixpkgs.lib.nixosSystem {
     system = system;
 
-    specialArgs = { inherit inputs pkgs system-stateVersion system; };
+    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
       ./app/ssh-keys.nix
