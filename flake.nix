@@ -54,5 +54,8 @@
     nixosConfigurations = import ./nixos-configurations.nix {
       inherit inputs nixpkgs home-manager agenix rust-overlay;
     };
+
+    # images
+    images = import ./images.nix { inherit inputs nixpkgs; };
   };
 }
