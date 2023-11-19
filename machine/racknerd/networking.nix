@@ -40,4 +40,30 @@
       "192.168.0.0/16"
     ];
   };
+
+  networking = {
+    nftables = {
+      enable = true;
+      ruleset = ''
+          table ip nat {
+            chain PREROUTING {
+              type nat hook prerouting priority dstnat; policy accept;
+              iifname "eth0" tcp dport 53377 dnat to 100.111.211.153:53377
+            }
+          }
+      '';
+    };
+    nat = {
+      enable = true;
+      internalInterfaces = [ "eth0" ];
+      externalInterface = "tailscale0";
+      forwardPorts = [
+        {
+          sourcePort = 53377;
+          proto = "tcp";
+          destination = "100.111.211.153:53377";
+        }
+      ];
+    };
+  };
 }
