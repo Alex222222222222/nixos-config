@@ -34,7 +34,7 @@ in {
 
   orangePiZero2 = let
     system = "aarch64-linux";
-    build_platform = "x86_64-linux";
+    build_platform = "aarch64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     ipv6_only = false;
     compressImage = true;     # Set to false to disable image compressing
@@ -48,7 +48,7 @@ in {
 
     modules = [
       {
-        nixpkgs.config.allowUnsupportedSystem = true;
+        # nixpkgs.config.allowUnsupportedSystem = true;
         # nixpkgs.crossSystem.system = system;
         nixpkgs.hostPlatform.system = system;
         nixpkgs.buildPlatform.system = build_platform; #If you build on x86 other wise changes this.
