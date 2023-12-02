@@ -10,7 +10,7 @@
 
   # Enable mosh, the ssh alternative when client has bad connection
   # Opens UDP ports 60000 ... 61000
-  programs.mosh.enable = true;
+  /*programs.mosh.enable = true;
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 60000;
@@ -29,6 +29,7 @@
   networking.firewall.allowedUDPPorts = [ 22 23 80 443 53 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
+  */
 
 
   /*services.fail2ban = {
