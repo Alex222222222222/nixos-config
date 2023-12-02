@@ -30,7 +30,8 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
-  services.fail2ban = {
+
+  /*services.fail2ban = {
     enable = true;
     maxretry = 5;
     ignoreIP = [
@@ -39,5 +40,6 @@
       "172.16.0.0/12"
       "192.168.0.0/16"
     ];
-  };
+  };*/
 }
+
