@@ -135,10 +135,10 @@ in {
         ./machine/chicago/configuration.nix
         ./machine/chicago/networking.nix
 
-        ./app/docker/docker.nix
-        ./app/tailscale/tailscale.nix
+        # ./app/docker/docker.nix
+        # ./app/tailscale/tailscale.nix
 
-        ./app/webdav/hetzner.nix
+        # ./app/webdav/hetzner.nix
       ];
     };
 }
