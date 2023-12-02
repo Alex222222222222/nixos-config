@@ -23,7 +23,6 @@ in forAllSystems (system:
       pkgs.wget
       pkgs.ncdu
       pkgs.bandwhich
-      pkgs.vscode
       pkgs.neovim
       pkgs.smartmontools
       pkgs.zstd
@@ -33,9 +32,13 @@ in forAllSystems (system:
       pkgs.mosh
       pkgs.rclone
       pkgs.docker
-      pkgs.heroku
-      pkgs.google-cloud-sdk
-      pkgs.awscli2
+      # pkgs.heroku
+      # pkgs.google-cloud-sdk
+      # pkgs.awscli2
+    ];
+    localBuildInputs = [
+      pkgs.gimp
+      pkgs.vscode
     ];
     commonShellHook = ''
       export EDITOR=nvim
@@ -86,7 +89,7 @@ in forAllSystems (system:
       pkgs.protobuf
       rust-toolchain
       pkgs.nodePackages_latest.tailwindcss
-    ] ++ rust-packages;
+    ] ++ rust-packages ++ localBuildInputs;
 
     R-with-my-packages = pkgs.rWrapper.override {
       packages = with pkgs.rPackages; [ ggplot2 dplyr xts ];
@@ -102,7 +105,7 @@ in forAllSystems (system:
 
       pkgs.curl
       pkgs.jq
-    ];
+    ] ++ localBuildInputs;
 
     nextjs = [
       pkgs.nodejs_20
@@ -127,9 +130,10 @@ in forAllSystems (system:
       shellHook = commonShellHook;
     };
     latex = pkgs.mkShell {
-      buildInputs = commonBuildInputs ++ [
+      buildInputs = commonBuildInputs ++ localBuildInputs ++ [
         pkgs.texlive.combined.scheme-full
         pkgs.inkscape
+        pkgs.pandoc
       ];
       shellHook = commonShellHook;
     };
@@ -153,6 +157,10 @@ in forAllSystems (system:
     };
     cloudflare = pkgs.mkShell{
       buildInputs = commonBuildInputs ++ cloudflare_workers;
+      shellHook = commonShellHook;
+    };
+    local = pkgs.mkShell {
+      buildInputs = commonBuildInputs ++ localBuildInputs;
       shellHook = commonShellHook;
     };
   })
