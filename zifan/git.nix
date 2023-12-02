@@ -6,7 +6,7 @@
     userEmail = "zifan.hua@icloud.com";
 
     extraConfig = {
-      core.editor = "nvim"; 
+      core.editor = "nvim";
       # Sign all commits using ssh key
       commit.gpgsign = true;
       gpg.format = "ssh";

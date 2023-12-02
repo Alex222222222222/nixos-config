@@ -23,17 +23,17 @@
     {
       # Provide some binary packages for selected system types.
       packages = forAllSystems (system:
-      let
-        pkgs = nixpkgsFor.${system};
-      in
-      {
-        default = pkgs.jellyfin;
-      });
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = pkgs.jellyfin;
+        });
 
-      nixosModules = 
-      {
-        default = import ./nixosModule-default.nix;
-        with-nginx-cloudlfare-acme = import ./nixosModule-with-nginx-cloudlfare-acme.nix;
-      };
+      nixosModules =
+        {
+          default = import ./nixosModule-default.nix;
+          with-nginx-cloudlfare-acme = import ./nixosModule-with-nginx-cloudlfare-acme.nix;
+        };
     };
 }

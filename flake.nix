@@ -49,6 +49,9 @@
   outputs = { self, nixpkgs, home-manager, agenix, rust-overlay, ... }@inputs: rec {
     devShells = import ./dev-shells.nix { inherit inputs nixpkgs; };
 
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+
     # 名为 nixosConfigurations 的 outputs 会在执行 `nixos-rebuild switch --flake .` 时被使用
     # 默认情况下会使用与主机 hostname 同名的 nixosConfigurations，但是也可以通过 `--flake .#<name>` 来指定
     nixosConfigurations = import ./nixos-configurations.nix {

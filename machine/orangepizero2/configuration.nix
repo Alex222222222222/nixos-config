@@ -1,4 +1,4 @@
-{nixpkgs, inputs, config, pkgs, system-stateVersion, system,...}:
+{ nixpkgs, inputs, config, pkgs, system-stateVersion, system, ... }:
 let
   # configure for cross compilation on linux
   # pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform;
@@ -15,7 +15,8 @@ let
     "ext4"
     "vfat"
   ];
-in {
+in
+{
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Select internationalisation properties.

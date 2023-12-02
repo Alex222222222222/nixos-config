@@ -1,4 +1,4 @@
-{pkgs,...}:
+{ pkgs, ... }:
 
 {
   # set default editor to vim

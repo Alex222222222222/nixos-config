@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   services.davfs2.enable = true;
   services.autofs = {

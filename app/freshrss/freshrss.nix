@@ -1,4 +1,4 @@
-{inputs, config, pkgs, ...}:
+{ inputs, config, pkgs, ... }:
 {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
@@ -7,11 +7,11 @@
       autoStart = true;
       ports = [ "127.0.0.1:8080:80" ];
       environment = {
-        CRON_MIN="1,31";
+        CRON_MIN = "1,31";
       };
       volumes = [
-          "freshrss_data:/var/www/FreshRSS/data"
-          "freshrss_extensions:/var/www/FreshRSS/extensions"
+        "freshrss_data:/var/www/FreshRSS/data"
+        "freshrss_extensions:/var/www/FreshRSS/extensions"
       ];
       extraOptions = [
       ];
