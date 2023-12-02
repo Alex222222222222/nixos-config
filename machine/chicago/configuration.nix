@@ -32,7 +32,7 @@
 
   # clean journalctl
   services.cron = {
-    enable = true;
+    # enable = true;
     systemCronJobs = [
       "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
     ];
