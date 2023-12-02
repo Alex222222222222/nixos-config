@@ -128,8 +128,8 @@ in {
         ./app/ssh-keys.nix
         ./app/nameservers.nix
 
-        ./secrets/secrets-path.nix
-        agenix.nixosModules.default
+        # ./secrets/secrets-path.nix
+        # agenix.nixosModules.default
 
         ./machine/chicago/hardware-configuration.nix
         ./machine/chicago/configuration.nix
