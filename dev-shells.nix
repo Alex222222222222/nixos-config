@@ -108,6 +108,12 @@ in forAllSystems (system:
       pkgs.nodejs_20
       pkgs.nodePackages.npm
     ];
+
+    cloudflare_workers = [
+      pkgs.nodejs_20
+      pkgs.nodePackages.npm
+      pkgs.nodePackages.wrangler
+    ];
   in {
     # The default package for 'nix build'. This makes sense if the
     # flake provides only one package or there is a clear "main"
@@ -121,7 +127,10 @@ in forAllSystems (system:
       shellHook = commonShellHook;
     };
     latex = pkgs.mkShell {
-      buildInputs = commonBuildInputs ++ [ pkgs.texlive.combined.scheme-full ];
+      buildInputs = commonBuildInputs ++ [
+        pkgs.texlive.combined.scheme-full
+        pkgs.inkscape
+      ];
       shellHook = commonShellHook;
     };
     # Also see https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/
@@ -140,6 +149,10 @@ in forAllSystems (system:
     };
     nextjs = pkgs.mkShell{
       buildInputs = commonBuildInputs ++ nextjs;
+      shellHook = commonShellHook;
+    };
+    cloudflare = pkgs.mkShell{
+      buildInputs = commonBuildInputs ++ cloudflare_workers;
       shellHook = commonShellHook;
     };
   })
