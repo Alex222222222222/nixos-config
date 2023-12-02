@@ -129,11 +129,11 @@
       },
       "locked": {
         "dir": "/app/hysteria",
-        "lastModified": 1701552544,
-        "narHash": "sha256-ZRamdkFf/LGNbxeLafg3BQrpIwSe4JP+g4cIckh6TeY=",
+        "lastModified": 1701552987,
+        "narHash": "sha256-Yj9s6oPRHCWJGejzUTaBq82hY56nCaoE9NZvJbY2hfE=",
         "owner": "Alex222222222222",
         "repo": "nixos-config",
-        "rev": "05a01d82754fed3c64aa60a48c97734ab78c6da3",
+        "rev": "5d9649a9e1d0a38c5fba3d7095ea8e2877de4f59",
         "type": "github"
       },
       "original": {
@@ -151,11 +151,11 @@
       },
       "locked": {
         "dir": "/app/jellyfin",
-        "lastModified": 1701552544,
-        "narHash": "sha256-ZRamdkFf/LGNbxeLafg3BQrpIwSe4JP+g4cIckh6TeY=",
+        "lastModified": 1701552987,
+        "narHash": "sha256-Yj9s6oPRHCWJGejzUTaBq82hY56nCaoE9NZvJbY2hfE=",
         "owner": "Alex222222222222",
         "repo": "nixos-config",
-        "rev": "05a01d82754fed3c64aa60a48c97734ab78c6da3",
+        "rev": "5d9649a9e1d0a38c5fba3d7095ea8e2877de4f59",
         "type": "github"
       },
       "original": {
