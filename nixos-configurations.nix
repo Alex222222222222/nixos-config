@@ -107,4 +107,31 @@ in {
       ./app/webdav/hetzner.nix
     ];
   };
+
+  chicago = let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    ipv6_only = false;
+  in nixpkgs.lib.nixosSystem {
+    system = system;
+
+    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
+
+    modules = [
+      ./app/ssh-keys.nix
+      ./app/nameservers.nix
+
+      ./secrets/secrets-path.nix
+      agenix.nixosModules.default
+
+      ./machine/chicago/hardware-configuration.nix
+      ./machine/chicago/configuration.nix
+      ./machine/chicago/networking.nix
+
+      ./app/docker/docker.nix
+      ./app/tailscale/tailscale.nix
+
+      ./app/webdav/hetzner.nix
+    ];
+  };
 }
