@@ -9,6 +9,14 @@
       5332
       8080
     ];
+    allowedTCPPorts = [
+      5332
+      8080
+    ];
+    allowedUDPPorts = [
+      5332
+      8080
+    ];
   };
 
   services.postgresql = {
