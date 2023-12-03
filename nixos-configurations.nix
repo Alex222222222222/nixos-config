@@ -115,7 +115,8 @@ in {
 
   chicago =
     let
-      system = "i686-linux";
+      # system = "i686-linux";
+      system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       ipv6_only = false;
     in
