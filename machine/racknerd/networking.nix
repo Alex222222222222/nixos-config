@@ -24,15 +24,6 @@
     }
   ];
 
-  networking.firewall = {
-    enable = true;
-    # Allow connections from the local network.
-    allowedTCPPorts = [ 22 23 80 443 53 config.services.tailscale.port ];
-    allowedUDPPorts = [ 22 23 80 443 53 config.services.tailscale.port ];
-    # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
-  };
-
   services.fail2ban = {
     enable = true;
     maxretry = 5;

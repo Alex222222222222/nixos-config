@@ -23,6 +23,8 @@ in {
         ./machine/racknerd/configuration.nix
         ./machine/racknerd/networking.nix
 
+        ./app/networking/firewall.nix
+
         ./app/docker/docker.nix
         ./app/tailscale/tailscale.nix
 
@@ -81,6 +83,8 @@ in {
 
         ./machine/orangepizero2/configuration.nix
         ./machine/orangepizero2/networking.nix
+
+        ./app/networking/firewall.nix
       ];
     };
 
@@ -105,6 +109,8 @@ in {
         ./machine/server-factory/hardware-configuration.nix
         ./machine/server-factory/configuration.nix
         ./machine/server-factory/networking.nix
+
+        ./app/networking/firewall.nix
 
         ./app/docker/docker.nix
         ./app/tailscale/tailscale.nix
@@ -135,6 +141,8 @@ in {
         ./machine/chicago/hardware-configuration.nix
         ./machine/chicago/configuration.nix
         ./machine/chicago/networking.nix
+
+        ./app/networking/firewall.nix
 
         # ./app/docker/docker.nix
         # ./app/tailscale/tailscale.nix

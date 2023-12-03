@@ -42,8 +42,6 @@
   boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = 1;
 
   networking.firewall = {
-    # enable the firewall
-    enable = true;
     # always allow traffic from your Tailscale network
     trustedInterfaces = [ "tailscale0" ];
     # allow the Tailscale UDP port through the firewall

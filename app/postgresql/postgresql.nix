@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 {
+  networking.firewall = if config.services.tailscale.enable then
+  {interfaces."tailscale0".allowedTCPPorts = [
+    5332
+    8080
+  ]};
+
   services.postgresql = {
     settings = {
       listen_addresses = "*";
