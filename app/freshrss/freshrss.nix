@@ -5,7 +5,7 @@
     freshrss = {
       image = "freshrss/freshrss";
       autoStart = true;
-      ports = [ "127.0.0.1:8080:80" ];
+      ports = [ "*:8080:80" ];
       environment = {
         CRON_MIN = "1,31";
       };
