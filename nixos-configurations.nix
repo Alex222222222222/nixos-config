@@ -1,6 +1,6 @@
 { inputs, nixpkgs, home-manager, agenix, rust-overlay, ... }:
 let system-stateVersion = "23.11";
-in {
+in rec {
   racknerd =
     let
       system = "x86_64-linux";
