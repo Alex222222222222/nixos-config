@@ -30,6 +30,8 @@
     # bandwhich
   ];
 
+  age.ageBin = "${pkgs.age}/bin/age";
+
   # clean journalctl
 
   # services.cron = {
