@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  networking.firewall = mkIf config.services.tailscale.enable {
+  networking.firewall = lib.mkIf config.services.tailscale.enable {
     interfaces."tailscale0".allowedTCPPorts = [
       5332
       8080
