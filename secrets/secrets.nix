@@ -11,6 +11,7 @@ let
     nixos-vultr-zifan
     m1-macbook
     nixos-server-factory-zifan
+    nixos-chicago-zifan
   ];
 
   nixos-vultr-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINipWxOn9DTJoJ5Oi47i4iMmkGZEkh6ngm1bQgvaA+tF root@nixos";
