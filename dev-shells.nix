@@ -33,6 +33,7 @@ let
     pkgs.mosh
     pkgs.rclone
     pkgs.docker
+    pkgs.nmap
     # pkgs.heroku
     # pkgs.google-cloud-sdk
     # pkgs.awscli2
