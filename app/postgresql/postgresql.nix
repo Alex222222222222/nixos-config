@@ -1,12 +1,11 @@
 { config, pkgs, ... }:
 {
-  networking.firewall = ? config.services.tailscale.enable
-    {
-      interfaces."tailscale0".allowedTCPPorts = [
-        5332
-        8080
-      ];
-    } : {};
+  networking.firewall = mkIf config.services.tailscale.enable {
+    interfaces."tailscale0".allowedTCPPorts = [
+      5332
+      8080
+    ];
+  };
 
   services.postgresql = {
     settings = {
