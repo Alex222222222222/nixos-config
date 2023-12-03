@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "server-factory"; # Define your hostname.
 
   networking = {
     dhcpcd.enable = false;

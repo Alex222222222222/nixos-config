@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "chicago"; # Define your hostname.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.usePredictableInterfaceNames = false;
   networking.dhcpcd.enable = true;
