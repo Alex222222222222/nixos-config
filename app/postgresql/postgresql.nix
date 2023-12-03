@@ -3,19 +3,15 @@
   networking.firewall = lib.mkIf config.services.tailscale.enable {
     interfaces."tailscale0".allowedTCPPorts = [
       5332
-      8080
     ];
     interfaces."tailscale0".allowedUDPPorts = [
       5332
-      8080
     ];
     allowedTCPPorts = [
       5332
-      8080
     ];
     allowedUDPPorts = [
       5332
-      8080
     ];
   };
 
