@@ -5,6 +5,10 @@
       5332
       8080
     ];
+    interfaces."tailscale0".allowedUDPPorts = [
+      5332
+      8080
+    ];
   };
 
   services.postgresql = {
