@@ -34,6 +34,7 @@ let
     pkgs.rclone
     pkgs.docker
     pkgs.nmap
+    pkgs.postgresql_14
     # pkgs.heroku
     # pkgs.google-cloud-sdk
     # pkgs.awscli2
