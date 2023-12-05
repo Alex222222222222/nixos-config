@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, home-manager, agenix, rust-overlay, lib, ... }:
+{ inputs, nixpkgs, home-manager, agenix, rust-overlay, ... }:
 let system-stateVersion = "23.11";
 in rec {
   racknerd =
@@ -154,7 +154,7 @@ in rec {
   macbookair =
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { system = system; config.allowUnfree = true; };
       ipv6_only = false;
     in
     nixpkgs.lib.nixosSystem {
@@ -163,11 +163,6 @@ in rec {
       specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
       modules = [
-        {
-          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-            "broadcom-sta"
-          ];
-        }
 
         ./app/ssh-keys.nix
         ./app/nameservers.nix
