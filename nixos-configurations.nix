@@ -163,6 +163,12 @@ in rec {
       specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
       modules = [
+        {
+          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+            "broadcom-sta"
+          ];
+        }
+
         ./app/ssh-keys.nix
         ./app/nameservers.nix
 
