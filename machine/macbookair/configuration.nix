@@ -1,5 +1,5 @@
 { inputs, config, pkgs, system-stateVersion, system, ... }:
-
+rec
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -49,7 +49,6 @@
   services.logind.lidSwitch = "ignore";
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitchExternalPower = "ignore";
-
 
   # clean journalctl
   services.cron = {
