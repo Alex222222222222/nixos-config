@@ -157,7 +157,7 @@ in rec {
       pkgs = nixpkgs.legacyPackages.${system};
       ipv6_only = false;
     in
-      nixpkgs.lib.nixosSystem rec {
+    nixpkgs.lib.nixosSystem {
       system = system;
 
       specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
