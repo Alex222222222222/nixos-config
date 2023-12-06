@@ -2,10 +2,8 @@
 
 with lib;
 
-let
-  cfg = config.services.jellyfin;
-in
-{
+let cfg = config.services.jellyfin;
+in {
   options = {
     services.jellyfin = {
       web-domain = mkOption {

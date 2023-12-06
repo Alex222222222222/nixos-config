@@ -1,22 +1,12 @@
 { config, pkgs, system-stateVersion, ... }:
 
 {
-  imports = [
-    ./git.nix
-    ./neovim/default.nix
-    ./zsh/zsh.nix
-  ];
+  imports = [ ./git.nix ./neovim/default.nix ./zsh/zsh.nix ];
 
   home.username = "zifan";
   home.homeDirectory = "/home/zifan";
 
-  home.packages = [
-    pkgs.zsh
-    pkgs.wget
-    pkgs.curl
-    pkgs.ncdu
-    pkgs.htop
-  ];
+  home.packages = [ pkgs.zsh pkgs.wget pkgs.curl pkgs.ncdu pkgs.htop ];
 
   home.stateVersion = system-stateVersion;
   programs.bash.enable = true;

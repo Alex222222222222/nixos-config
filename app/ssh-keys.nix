@@ -7,9 +7,11 @@ let
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgdCxrHQGKaoV3GtLX5/joCDZz7+ULNpJm4388UYKE+wCaEkVDafy2/AhErCOi9jdd5+i7h6GGSrHu6m/TPhnyQsbJh1n+Uj2u8YsCvfW5+a9qXaki8MFXXss9m2yVyB8o4/sSPIG3f3AkpoQeLydiqxJRi4+sU4YN2M+dCuDMAGD+7mFyghlwF3TSs02YhIicyx0twAyK5LDLMJ3McU/QtwO19z/uItb3DzNs2jyQ70k6voThI+xM7npm8eDyzyEFiDfZlaBWT0jEnjSEjna7FamJUXqT8nQTtSb/1aWiLTJnqOjZTL8wpv16GovPZrg2qWDFjZeRLeidazFexCMXGV++H8V4ruEpN8E2z1G2t3z28miL29stzU28eNekNF9eQWeEjEKfmY1+Me0f/tDjNMR6tn9Mj/ibD8eZ4DtW14X96UPBHoOn84CNulWdCBB/7ioqXLyXj1E5Bq5V0GPK6Uz8+B3hj1CAAzZRpy9BJcMqaevri0HlHMqaDwZDwdE="
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMnYWX7CjhTORHbVQYqldCwvYhNi8IBYUDi+vB53sU+H"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPsTMcyMlFmShbSCK5WsmCVyWGjLCk2a+v1GQkUUiWh zifan@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEbWF5tOP9ul4s/rAfx615yEb0z9yjEtiX254rFcdS/ zifan@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPsTMcyMlFmShbSCK5WsmCVyWGjLCk2a+v1GQkUUiWh zifan@nixos"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMPRbG0ogui/sRecGgAjOvd5bLFqyX/rSh7I/vbOCYs zifan@nixos"
   ];
-in
-{
+in {
   users.users.zifan.openssh.authorizedKeys.keys = keys;
   users.users.root.openssh.authorizedKeys.keys = keys;
 }

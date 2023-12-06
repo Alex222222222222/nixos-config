@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   # enable docker
   virtualisation.docker.enable = false;
   virtualisation.podman.enable = true;

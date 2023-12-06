@@ -5,10 +5,9 @@
 { config, pkgs, system-stateVersion, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -40,9 +39,7 @@
   # clean journalctl
   services.cron = {
     enable = true;
-    systemCronJobs = [
-      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
-    ];
+    systemCronJobs = [ "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" ];
   };
 
   # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F

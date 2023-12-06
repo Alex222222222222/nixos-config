@@ -1,24 +1,13 @@
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   networking.firewall = lib.mkIf config.services.tailscale.enable {
-    interfaces."tailscale0".allowedTCPPorts = [
-      5332
-    ];
-    interfaces."tailscale0".allowedUDPPorts = [
-      5332
-    ];
-    allowedTCPPorts = [
-      5332
-    ];
-    allowedUDPPorts = [
-      5332
-    ];
+    interfaces."tailscale0".allowedTCPPorts = [ 5332 ];
+    interfaces."tailscale0".allowedUDPPorts = [ 5332 ];
+    allowedTCPPorts = [ 5332 ];
+    allowedUDPPorts = [ 5332 ];
   };
 
   services.postgresql = {
-    settings = {
-      listen_addresses = "*";
-    };
+    settings = { listen_addresses = "*"; };
     enable = true;
     ensureDatabases = [ "freshrss" ];
     enableTCPIP = true;

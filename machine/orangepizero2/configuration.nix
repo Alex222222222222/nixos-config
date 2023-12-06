@@ -11,12 +11,11 @@ let
     "xfs"
     "ntfs"
     "cifs"
-    /* "zfs" */
+    # "zfs"
     "ext4"
     "vfat"
   ];
-in
-{
+in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Select internationalisation properties.
@@ -31,9 +30,7 @@ in
   # clean journalctl
   services.cron = {
     enable = true;
-    systemCronJobs = [
-      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
-    ];
+    systemCronJobs = [ "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" ];
   };
 
   # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F
@@ -63,51 +60,49 @@ in
   hardware.deviceTree = {
     enable = true;
     filter = "sun50i-h616-orangepi-zero2.dtb";
-    overlays = [
-      {
-        name = "sun50i-h616-orangepi-zero2.dtb";
-        dtsText = ''
-          /dts-v1/;
-          /plugin/;
+    overlays = [{
+      name = "sun50i-h616-orangepi-zero2.dtb";
+      dtsText = ''
+        /dts-v1/;
+        /plugin/;
 
-          / {
-            compatible = "xunlong,orangepi-zero2", "allwinner,sun50i-h616";
-          };
+        / {
+          compatible = "xunlong,orangepi-zero2", "allwinner,sun50i-h616";
+        };
 
-          &ehci0 {
-            status = "okay";
-          };
+        &ehci0 {
+          status = "okay";
+        };
 
-          &ehci1 {
-            status = "okay";
-          };
+        &ehci1 {
+          status = "okay";
+        };
 
-          &ehci2 {
-            status = "okay";
-          };
+        &ehci2 {
+          status = "okay";
+        };
 
-          &ehci3 {
-            status = "okay";
-          };
+        &ehci3 {
+          status = "okay";
+        };
 
-          &ohci0 {
-            status = "okay";
-          };
+        &ohci0 {
+          status = "okay";
+        };
 
-          &ohci1 {
-            status = "okay";
-          };
+        &ohci1 {
+          status = "okay";
+        };
 
-          &ohci2 {
-            status = "okay";
-          };
+        &ohci2 {
+          status = "okay";
+        };
 
-          &ohci3 {
-            status = "okay";
-          };
-        '';
-      }
-    ];
+        &ohci3 {
+          status = "okay";
+        };
+      '';
+    }];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

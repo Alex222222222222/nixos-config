@@ -1,11 +1,7 @@
-{ config, inputs, system, ... }:
-{
-  imports = [
-  ];
+{ config, inputs, system, ... }: {
+  imports = [ ];
 
-  environment.systemPackages = [
-    inputs.agenix.packages.${system}.default
-  ];
+  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
 
   age.secrets = {
     hetzner-webdav-secrets = {
@@ -36,8 +32,6 @@
 
     cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
 
-    freshrss_tunnel_token = {
-      file = ./freshrss_tunnel_token;
-    };
+    freshrss_tunnel_token = { file = ./freshrss_tunnel_token; };
   };
 }

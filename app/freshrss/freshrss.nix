@@ -1,20 +1,16 @@
-{ inputs, config, pkgs, ... }:
-{
+{ inputs, config, pkgs, ... }: {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
     freshrss = {
       image = "freshrss/freshrss";
       autoStart = true;
       ports = [ "127.0.0.1:8080:80" ];
-      environment = {
-        CRON_MIN = "1,31";
-      };
+      environment = { CRON_MIN = "1,31"; };
       volumes = [
         "freshrss_data:/var/www/FreshRSS/data"
         "freshrss_extensions:/var/www/FreshRSS/extensions"
       ];
-      extraOptions = [
-      ];
+      extraOptions = [ ];
     };
   };
 
@@ -48,7 +44,8 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash /etc/freshrss/freshrss_cloudflare_tunnel";
+      ExecStart =
+        "${pkgs.bash}/bin/bash /etc/freshrss/freshrss_cloudflare_tunnel";
       Restart = "always";
       User = "cloudflared";
       Group = "cloudflared";

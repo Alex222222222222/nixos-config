@@ -4,21 +4,18 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [
-      (modulesPath + "/profiles/qemu-guest.nix")
-    ];
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.availableKernelModules =
+    [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/6b80f4ce-5c3c-4461-8939-4925c04c78d8";
-      fsType = "btrfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/6b80f4ce-5c3c-4461-8939-4925c04c78d8";
+    fsType = "btrfs";
+  };
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/0049b48a-3ae5-450c-b879-ac627ff429a1"; }];

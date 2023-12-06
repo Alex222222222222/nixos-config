@@ -1,6 +1,4 @@
-{ inputs, config, pkgs, system-stateVersion, system, ... }:
-rec
-{
+{ inputs, config, pkgs, system-stateVersion, system, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -53,9 +51,7 @@ rec
   # clean journalctl
   services.cron = {
     enable = true;
-    systemCronJobs = [
-      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null"
-    ];
+    systemCronJobs = [ "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" ];
   };
 
   # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F

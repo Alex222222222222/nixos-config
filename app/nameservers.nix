@@ -54,7 +54,4 @@ let
   ];
 
   nameservers = if ipv6_only then nat64 else ipv4_only;
-in
-{
-  networking.nameservers = nameservers;
-}
+in { networking.nameservers = nameservers; }

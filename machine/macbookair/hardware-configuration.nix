@@ -4,27 +4,23 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/64f1fb9d-a96e-4026-ad6e-9a4870c8ffe5";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/64f1fb9d-a96e-4026-ad6e-9a4870c8ffe5";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/67E3-17ED";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/67E3-17ED";
+    fsType = "vfat";
+  };
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/6aec991e-70d3-4c28-a8ec-fec293d7b3cb"; }];
@@ -37,5 +33,6 @@
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

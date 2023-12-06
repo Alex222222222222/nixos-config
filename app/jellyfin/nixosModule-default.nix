@@ -2,10 +2,8 @@
 
 with lib;
 
-let
-  cfg = config.services.jellyfin;
-in
-{
+let cfg = config.services.jellyfin;
+in {
   options = {
     services.jellyfin = {
       enable = mkEnableOption (lib.mdDoc "Jellyfin Media Server");
@@ -52,7 +50,8 @@ in
         CacheDirectoryMode = "0700";
         UMask = "0077";
         WorkingDirectory = "/var/lib/jellyfin";
-        ExecStart = "${cfg.package}/bin/jellyfin --datadir '/var/lib/${StateDirectory}' --cachedir '/var/cache/${CacheDirectory}'";
+        ExecStart =
+          "${cfg.package}/bin/jellyfin --datadir '/var/lib/${StateDirectory}' --cachedir '/var/cache/${CacheDirectory}'";
         Restart = "on-failure";
         TimeoutSec = 15;
         SuccessExitStatus = [ "0" "143" ];
@@ -61,7 +60,8 @@ in
         NoNewPrivileges = true;
         SystemCallArchitectures = "native";
         # AF_NETLINK needed because Jellyfin monitors the network connection
-        RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
+        RestrictAddressFamilies =
+          [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
         RestrictNamespaces = !config.boot.isContainer;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
@@ -105,9 +105,7 @@ in
       };
     };
 
-    users.groups = mkIf (cfg.group == "jellyfin") {
-      jellyfin = { };
-    };
+    users.groups = mkIf (cfg.group == "jellyfin") { jellyfin = { }; };
 
   };
 

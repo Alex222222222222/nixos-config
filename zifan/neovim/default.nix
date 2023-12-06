@@ -2,24 +2,16 @@
 
 {
   # set default editor to vim
-  systemd.user.sessionVariables = {
-    EDITOR = "vim";
-  };
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
+  systemd.user.sessionVariables = { EDITOR = "vim"; };
+  home.sessionVariables = { EDITOR = "vim"; };
 
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
-    extraConfig = "
-      ${builtins.readFile ./init.vim}
-    ";
-    extraLuaConfig = "
-      ${builtins.readFile ./init.lua}
-    ";
+    extraConfig = "\n      ${builtins.readFile ./init.vim}\n    ";
+    extraLuaConfig = "\n      ${builtins.readFile ./init.lua}\n    ";
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
       vim-nix
@@ -42,9 +34,7 @@
           "rust" = "html";
         };
         "markdownlint.config" = {
-          "MD013" = {
-            "code_block_line_length" = 120;
-          };
+          "MD013" = { "code_block_line_length" = 120; };
           "code_block_line_length" = 120;
         };
         "cSpell.language" = "en-GB";

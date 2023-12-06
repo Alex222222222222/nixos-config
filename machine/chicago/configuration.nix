@@ -24,24 +24,23 @@
     wget
     curl
     git
-    # ncdu
-    # tmux
-    # htop
-    # bandwhich
+    ncdu
+    tmux
+    htop
+    bandwhich
   ];
 
   # clean journalctl
-
-  # services.cron = {
-  #     enable = true;
-  #     systemCronJobs = [
-  #       "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" // Clean up journal logs every week
-  #     ];
-  #   };
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" # Clean up journal logs every week
+    ];
+  };
 
   # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F
-  # nix.gc.automatic = true;
-  # nix.settings.auto-optimise-store = true;
+  nix.gc.automatic = true;
+  nix.settings.auto-optimise-store = true;
 
   system.stateVersion = system-stateVersion; # Did you read the comment?
 }
