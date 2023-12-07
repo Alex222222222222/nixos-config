@@ -176,6 +176,8 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
+
+      ./app/cockroach.nix
     ];
   };
 }
