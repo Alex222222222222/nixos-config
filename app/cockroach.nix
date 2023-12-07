@@ -24,20 +24,32 @@
     maxSqlMemory = "1GB";
   };
 
-  # one time setup
-  systemd.services.cockroachdb_setup = {
-    description = "CockroachDB setup";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = "cockraochdb";
-      Group = "cockroachdb";
-    };
-
-    script = ''
-      mkdir -p /etc/cockroachdb/certs
+  environment.etc."cockroachdb/certs/README.md" = {
+    enable = true;
+    group = "cockroachdb";
+    user = "cockroachdb";
+    text = ''
+      # This directory is used to store certificates for CockroachDB.
+      # The certificates are generated automatically by NixOps.
+      # You can replace them with your own certificates if you want to.
     '';
   };
+
+  # one time setup
+  /* systemd.services.cockroachdb_setup = {
+       description = "CockroachDB setup";
+       wantedBy = [ "multi-user.target" ];
+       serviceConfig = {
+         Type = "oneshot";
+         User = "cockraochdb";
+         Group = "cockroachdb";
+       };
+
+       script = ''
+         mkdir -p /etc/cockroachdb/certs
+       '';
+     };
+  */
 
   networking.firewall.allowedTCPPorts = [ 26257 ];
   networking.firewall.allowedUDPPorts = [ 26257 ];
