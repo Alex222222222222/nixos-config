@@ -15,12 +15,8 @@
       address = "*";
       port = 8081;
     };
-    join = [
-      "macbookair.alex1222.com:26257"
-      "racknerd.alex1222.com:26257"
-      "chicago.alex1222.com:26257"
-      "server-factory.alex1222.com:26257"
-    ];
+    join =
+      "macbookair.alex1222.com:26257,racknerd.alex1222.com:26257,chicago.alex1222.com:26257,server-factory.alex1222.com:26257";
     listen = {
       address = "*";
       port = 26257;
