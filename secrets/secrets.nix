@@ -10,7 +10,7 @@ let
   nixos-server-factory-zifan =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEbWF5tOP9ul4s/rAfx615yEb0z9yjEtiX254rFcdS/ zifan@nixos";
   nixos-chicago-zifan =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPsTMcyMlFmShbSCK5WsmCVyWGjLCk2a+v1GQkUUiWh zifan@nixos";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHc4St5vGhGAAAtwT3o0vXrS+yQUazihqGDX9rUnJ55m zifan@chicago";
   nixos-macbookair-zifan =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMPRbG0ogui/sRecGgAjOvd5bLFqyX/rSh7I/vbOCYs zifan@nixos";
   users = [
@@ -32,7 +32,7 @@ let
   nixos-server-facotry-system =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaMHTBU+qGcs13MqOC/J0rE0e0NzmatWhy1R2AyNgoI root@nixos";
   nixos-chicago-system =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbhtume6RJTGII2DpUyqf72eWjhQDTnN7omkJO0hCxi root@nixos";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINczAuiza3yv/OUfP42BtdDuAAjb2qe6nbJ8pXihT7nG root@chicago";
   nixos-macbookair-system =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcb0+jSQ8yeKKq8xdwkf+nJ58g4IDZbSCPeF9MlqvVe root@nixos";
   systems = [

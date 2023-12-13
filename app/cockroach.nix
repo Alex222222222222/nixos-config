@@ -6,8 +6,8 @@
     extraArgs = [
       "--advertise-addr"
       "*"
-      "--num-expected-initial-nodes"
-      "5"
+      # "--num-expected-initial-nodes"
+      # "5"
       "--init-token"
       "secret"
     ];

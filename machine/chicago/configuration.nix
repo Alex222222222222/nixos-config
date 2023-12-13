@@ -6,8 +6,10 @@
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
+  # Define on which hard drive you want to install Grub.
+  boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -20,7 +22,7 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     wget
     curl
     git
@@ -33,12 +35,9 @@
   # clean journalctl
   services.cron = {
     enable = true;
-    systemCronJobs = [
-      "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" # Clean up journal logs every week
-    ];
+    systemCronJobs = [ "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" ];
   };
 
-  # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
 

@@ -139,10 +139,10 @@ in {
 
       ./app/networking/firewall.nix
 
-      # ./app/docker/docker.nix
-      # ./app/tailscale/tailscale.nix
+      ./app/docker/docker.nix
+      ./app/tailscale/tailscale.nix
 
-      # ./app/webdav/hetzner.nix
+      ./app/webdav/hetzner.nix
     ];
   };
 
@@ -176,8 +176,6 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
-
-      ./app/cockroach.nix
     ];
   };
 }
