@@ -2,7 +2,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    serverAddr = "https://racknerd.alex1222.com:6443";
+    serverAddr = "https://100.88.201.130:6443";
     tokenFile = config.age.secrets.k3s-common-secret.path;
   };
 
