@@ -33,5 +33,7 @@
     cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
 
     freshrss_tunnel_token = { file = ./freshrss_tunnel_token; };
+
+    k3s-common-secret = { file = ./k3s-common-secret; };
   };
 }

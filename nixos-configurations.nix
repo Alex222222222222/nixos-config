@@ -31,6 +31,8 @@ in {
       ./app/webdav/hetzner.nix
 
       ./app/freshrss/freshrss.nix
+
+      ./app/k3s/first_node.nix
     ];
   };
 
@@ -113,6 +115,8 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
+
+      ./app/k3s/subsequent_node.nix
     ];
   };
 
@@ -143,6 +147,8 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
+
+      ./app/k3s/subsequent_node.nix
     ];
   };
 
@@ -176,6 +182,8 @@ in {
       ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
+
+      ./app/k3s/subsequent_node.nix
     ];
   };
 }

@@ -55,4 +55,5 @@ in {
   "postgresql-freshrss-pass".publicKeys = all;
   "cloudme-webdav-secrets".publicKeys = all;
   "freshrss_tunnel_token".publicKeys = all;
+  "k3s-common-secret".publicKeys = all;
 }
