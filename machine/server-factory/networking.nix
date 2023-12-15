@@ -18,6 +18,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  networking.ipv6_only = true;
 
   # Enable mosh, the ssh alternative when client has bad connection
   # Opens UDP ports 60000 ... 61000

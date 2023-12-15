@@ -11,8 +11,7 @@ in {
     specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
-      ./app/ssh-keys.nix
-      ./app/nameservers.nix
+      ./app/common.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
@@ -74,8 +73,7 @@ in {
       # Minimal configuration
       "${nixpkgs}/nixos/modules/profiles/minimal.nix"
 
-      ./app/ssh-keys.nix
-      ./app/nameservers.nix
+      ./app/common.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
@@ -97,8 +95,7 @@ in {
     specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
-      ./app/ssh-keys.nix
-      ./app/nameservers.nix
+      ./app/common.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
@@ -127,8 +124,7 @@ in {
     specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
-      ./app/ssh-keys.nix
-      ./app/nameservers.nix
+      ./app/common.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
@@ -159,9 +155,7 @@ in {
     specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
 
     modules = [
-
-      ./app/ssh-keys.nix
-      ./app/nameservers.nix
+      ./app/common.nix
 
       ./secrets/secrets-path.nix
       agenix.nixosModules.default
