@@ -1,9 +1,12 @@
-{ config, ... }: {
+{ config,pkgs, ... }: {
   services.k3s = {
     enable = true;
     role = "server";
     clusterInit = true;
     tokenFile = config.age.secrets.k3s-common-secret.path;
+    environmentFile = pkgs.writeText "k3s.env" ''
+      PATH=$PATH:${pkgs.tailscale}/bin
+    '';
     extraFlags = "--vpn-auth-file=${config.age.secrets.k3s-tailscale.path}";
   };
 
