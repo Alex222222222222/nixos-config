@@ -4,7 +4,7 @@
     role = "server";
     clusterInit = true;
     tokenFile = config.age.secrets.k3s-common-secret.path;
-    extraFlags = [ "--vpn-auth-file=${config.age.secrets.k3s-tailscale.path}" ];
+    extraFlags = "--vpn-auth-file=${config.age.secrets.k3s-tailscale.path}";
   };
 
   networking.firewall.allowedTCPPorts = [
