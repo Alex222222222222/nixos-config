@@ -89,7 +89,7 @@ in {
     ];
   };
 
-  serverfactory = let
+  server-factory = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     ipv6_only = true;

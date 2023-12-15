@@ -51,7 +51,9 @@
   # clean journalctl
   services.cron = {
     enable = true;
-    systemCronJobs = [ "0 0 * * * journalctl --vacuum-time=7d 1>/dev/null" ];
+    systemCronJobs = [
+      "0 * * * * journalctl --vacuum-time=7d --vacuum-size=128M 1>/dev/null"
+    ];
   };
 
   # garbange collection check https://nixos.wiki/wiki/Nix_Cookbook#Reclaim_space_on_Nix_install.3F

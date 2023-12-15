@@ -35,5 +35,7 @@
     freshrss_tunnel_token = { file = ./freshrss_tunnel_token; };
 
     k3s-common-secret = { file = ./k3s-common-secret; };
+
+    k3s-tailscale = { file = ./k3s-tailscale; };
   };
 }
