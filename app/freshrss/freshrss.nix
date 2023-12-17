@@ -44,7 +44,7 @@ in {
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
       ExecStart =
-        "${pkgs.bash}/bin/bash -c '${freshrss-cloudflare-tunnel-script}'";
+        "${pkgs.bash}/bin/bash '${freshrss-cloudflare-tunnel-script}'";
       Restart = "always";
       User = "cloudflared";
       Group = "cloudflared";
