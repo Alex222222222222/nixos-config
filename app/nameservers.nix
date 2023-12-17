@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   nat64 = [
     "2001:67c:2b0::4"
@@ -52,7 +52,7 @@ let
     "2606:4700:4700::1113"
     "2606:4700:4700::1003"
   ];
-in rec {
+in {
   options = {
     networking.ipv6_only = lib.mkOption {
       type = lib.types.bool;
@@ -62,7 +62,8 @@ in rec {
     };
   };
 
-  networking.nameservers =
-    if options.networking.ipv6_only then nat64 else ipv4_only;
-
+  config = {
+    networking.nameservers =
+      if config.networking.ipv6_only then nat64 else ipv4_only;
+  };
 }
