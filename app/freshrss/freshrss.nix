@@ -1,4 +1,20 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, config, pkgs, ... }:
+let
+  edge-ip-version = if config.networking.ipv6_only then "6" else "auto";
+  freshrss-cloudflare-tunnel-script = pkgs.writeText ''
+    if [[ $(whoami) == "cloudflared" ]]; then
+    else
+      exit 1;
+    fi
+
+    secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
+
+    ${pkgs.cloudflared}/bin/cloudflared \
+      --edge-ip-version=${edge-ip-version} \
+      --post-quantum \
+      tunnel --no-autoupdate run --token="$secret"
+  '';
+in {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
     freshrss = {
@@ -20,32 +36,13 @@
     isSystemUser = true;
   };
 
-  system.activationScripts."freshrss_cloudflare_tunnel_token" = ''
-    secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
-    configFile=/etc/freshrss/freshrss_cloudflare_tunnel
-    ${pkgs.gnused}/bin/sed -i "s#{{ FRESH_RSS_PASS }}#$secret#" "$configFile"
-  '';
-
-  environment.etc = {
-    # Creates /etc/nanorc
-    "freshrss/freshrss_cloudflare_tunnel" = {
-      text = ''
-        ${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token={{ FRESH_RSS_PASS }}
-      '';
-      user = "cloudflared";
-      group = "cloudflared";
-      # The UNIX file mode bits
-      mode = "0440";
-    };
-  };
-
   systemd.services.freshrss_tunnel = {
     description = "Cloudflare Tunnel for Selfhosted FreshRSS";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
     serviceConfig = {
       ExecStart =
-        "${pkgs.bash}/bin/bash /etc/freshrss/freshrss_cloudflare_tunnel";
+        "${pkgs.bash}/bin/bash -c '${freshrss-cloudflare-tunnel-script}'";
       Restart = "always";
       User = "cloudflared";
       Group = "cloudflared";
