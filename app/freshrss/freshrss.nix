@@ -1,19 +1,20 @@
 { inputs, config, pkgs, ... }:
 let
   edge-ip-version = if config.networking.ipv6_only then "6" else "auto";
-  freshrss-cloudflare-tunnel-script = pkgs.writeText "freshrss-cloudflare-tunnel-script" ''
-    if [[ $(whoami) == "cloudflared" ]]; then
-    else
-      exit 1;
-    fi
+  freshrss-cloudflare-tunnel-script =
+    pkgs.writeText "freshrss-cloudflare-tunnel-script" ''
+      if [[ $(whoami) == "cloudflared" ]]; then
+      else
+        exit 1;
+      fi
 
-    secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
+      secret=$(cat "${config.age.secrets.freshrss_tunnel_token.path}")
 
-    ${pkgs.cloudflared}/bin/cloudflared \
-      --edge-ip-version=${edge-ip-version} \
-      --post-quantum \
-      tunnel --no-autoupdate run --token="$secret"
-  '';
+      ${pkgs.cloudflared}/bin/cloudflared \
+        --edge-ip-version=${edge-ip-version} \
+        --post-quantum \
+        tunnel --no-autoupdate run --token="$secret"
+    '';
 in {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
@@ -34,6 +35,8 @@ in {
   users.users.cloudflared = {
     group = "cloudflared";
     isSystemUser = true;
+    description = "cloudlfared tunnel user";
+    useDefaultShell = true;
   };
 
   systemd.services.freshrss_tunnel = {
