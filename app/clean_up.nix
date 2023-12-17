@@ -1,4 +1,4 @@
-{ }: {
+{ ... }: {
   # clean journalctl
   services.cron = {
     enable = true;
