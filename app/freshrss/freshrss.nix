@@ -3,8 +3,7 @@ let
   edge-ip-version = if config.networking.ipv6_only then "6" else "auto";
   freshrss-cloudflare-tunnel-script =
     pkgs.writeText "freshrss-cloudflare-tunnel-script" ''
-      if [[ $(whoami) == "cloudflared" ]]; then
-      else
+      if [[ $(whoami) != "cloudflared" ]]; then
         exit 1;
       fi
 
