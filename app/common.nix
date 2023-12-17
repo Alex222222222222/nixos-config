@@ -1,3 +1,11 @@
 { config, pkgs, ... }: {
-  imports = [ ./clean_up.nix ./nameservers.nix ./ssh-keys.nix ];
+  imports = [
+    ./clean_up.nix
+    ./nameservers.nix
+    ./ssh-keys.nix
+    ./networking/firewall.nix
+    ./docker/docker.nix
+    ./tailscale/tailscale.nix
+    ./webdav/hetzner.nix
+  ];
 }

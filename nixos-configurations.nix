@@ -25,11 +25,7 @@ in {
       ./app/docker/docker.nix
       ./app/tailscale/tailscale.nix
 
-      ./app/postgresql/postgresql.nix
-
       ./app/webdav/hetzner.nix
-
-      ./app/freshrss/freshrss.nix
     ];
   };
 
@@ -104,12 +100,9 @@ in {
       ./machine/server-factory/configuration.nix
       ./machine/server-factory/networking.nix
 
-      ./app/networking/firewall.nix
+      ./app/postgresql/postgresql.nix
 
-      ./app/docker/docker.nix
-      ./app/tailscale/tailscale.nix
-
-      ./app/webdav/hetzner.nix
+      # ./app/freshrss/freshrss.nix
     ];
   };
 
