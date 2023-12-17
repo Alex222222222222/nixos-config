@@ -4,11 +4,10 @@ in {
   racknerd = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    ipv6_only = false;
   in nixpkgs.lib.nixosSystem {
     system = system;
 
-    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
+    specialArgs = { inherit inputs pkgs system-stateVersion system; };
 
     modules = [
       ./app/common.nix
@@ -19,11 +18,6 @@ in {
       ./machine/racknerd/hardware-configuration.nix
       ./machine/racknerd/configuration.nix
       ./machine/racknerd/networking.nix
-
-      ./app/networking/firewall.nix
-
-      ./app/docker/docker.nix
-      ./app/tailscale/tailscale.nix
 
       ./app/webdav/hetzner.nix
     ];
@@ -84,11 +78,10 @@ in {
   server-factory = let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    ipv6_only = true;
   in nixpkgs.lib.nixosSystem {
     system = system;
 
-    specialArgs = { inherit inputs pkgs system-stateVersion system ipv6_only; };
+    specialArgs = { inherit inputs pkgs system-stateVersion system; };
 
     modules = [
       ./app/common.nix
@@ -102,7 +95,7 @@ in {
 
       ./app/postgresql/postgresql.nix
 
-      # ./app/freshrss/freshrss.nix
+      ./app/freshrss/freshrss.nix
     ];
   };
 
