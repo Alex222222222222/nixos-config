@@ -11,6 +11,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPsTMcyMlFmShbSCK5WsmCVyWGjLCk2a+v1GQkUUiWh zifan@nixos"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMPRbG0ogui/sRecGgAjOvd5bLFqyX/rSh7I/vbOCYs zifan@nixos"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHc4St5vGhGAAAtwT3o0vXrS+yQUazihqGDX9rUnJ55m zifan@chicago"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFxPhGZ9rAx1bTm5kJ/l4a2CGk4iGY29278KJy7RQLlX root@racknerd"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3WZzDoWCJ3pfjDR3BPbmMmanIk0tNbup5U/F0vtfNE zifan@racknerd"
   ];
 in {
   users.users.zifan.openssh.authorizedKeys.keys = keys;
