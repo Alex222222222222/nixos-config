@@ -14,6 +14,13 @@ let
         --post-quantum \
         tunnel --no-autoupdate run --token="$secret"
     '';
+  freshress-cloudflare-warp-script =
+    pkgs.writeText "freshress-cloudflare-warp-script" ''
+      ${pkgs.cloudflare-warp}/bin/warp-cli register
+      ${pkgs.cloudflare-warp}/bin/warp-cli set-mode proxy
+      ${pkgs.cloudflare-warp}/bin/warp-cli set-proxy-port 39999 // or anything
+      ${pkgs.cloudflare-warp}/bin/warp-cli connect
+    '';
 in {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
@@ -26,23 +33,20 @@ in {
         "freshrss_data:/var/www/FreshRSS/data"
         "freshrss_extensions:/var/www/FreshRSS/extensions"
       ];
-      dependsOn = [ "freshrss-cloudflare-warp-proxy" ];
+      dependsOn = [ ];
       extraOptions = [ ];
     };
-    freshrss-cloudflare-warp-proxy = {
-      image = "caomingjun/warp";
-      autoStart = true;
-      cmd = [ ];
-      ports = [ "39999:1080" ];
-      environment = { WARP_SLEEP = "2"; };
-      extraOptions = [
-        "--sysctl"
-        "net.ipv6.conf.all.disable_ipv6=0"
-        "--sysctl"
-        "net.ipv4.conf.all.src_valid_mark=1"
-        "--cap-add"
-        "net_admin"
-      ];
+  };
+  services.systemd.cloudflare-warp-proxy = {
+    enable = true;
+    description = "Cloudflare Warp Proxy for Selfhosted FreshRSS";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" "systemd-resolved.service" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bash}/bin/bash '${freshress-cloudflare-warp-script}'";
+      Restart = "always";
+      User = "cloudflared";
+      Group = "cloudflared";
     };
   };
 
