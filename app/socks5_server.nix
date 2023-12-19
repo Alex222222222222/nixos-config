@@ -13,4 +13,7 @@
     }];
     usersFile = config.age.secrets.pass-3proxy.path;
   };
+
+  netowrking.firewall.allowedTCPPorts = [ 39999 ];
+  networking.firewall.allowedUDPPorts = [ 39999 ];
 }
