@@ -7,5 +7,6 @@
     ./docker/docker.nix
     ./tailscale/tailscale.nix
     ./webdav/hetzner.nix
+    ./socks5_server.nix
   ];
 }

@@ -41,5 +41,7 @@
     k3s-common-secret = { file = ./k3s-common-secret; };
 
     k3s-tailscale = { file = ./k3s-tailscale; };
+
+    pass-3proxy = { file = ./pass-3proxy; };
   };
 }

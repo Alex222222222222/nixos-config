@@ -45,4 +45,5 @@ in {
   "freshrss_tunnel_token".publicKeys = all;
   "k3s-common-secret".publicKeys = all;
   "k3s-tailscale".publicKeys = all;
+  "pass-3proxy".publicKeys = all;
 }
