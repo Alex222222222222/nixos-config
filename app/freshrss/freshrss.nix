@@ -26,6 +26,12 @@ in {
         "freshrss_data:/var/www/FreshRSS/data"
         "freshrss_extensions:/var/www/FreshRSS/extensions"
       ];
+      dependsOn = [ "freshrss-cloudflare-warp-proxy" ];
+    };
+    freshrss-cloudflare-warp-proxy = {
+      image = "yarmak/warp-proxy";
+      autoStart = true;
+      ports = [ "0.0.0.0:39999:40000" ];
       extraOptions = [ ];
     };
   };
