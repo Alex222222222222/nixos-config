@@ -14,13 +14,6 @@ let
         --post-quantum \
         tunnel --no-autoupdate run --token="$secret"
     '';
-  freshress-cloudflare-warp-script =
-    pkgs.writeText "freshress-cloudflare-warp-script" ''
-      ${pkgs.cloudflare-warp}/bin/warp-cli register
-      ${pkgs.cloudflare-warp}/bin/warp-cli set-mode proxy
-      ${pkgs.cloudflare-warp}/bin/warp-cli set-proxy-port 39999 // or anything
-      ${pkgs.cloudflare-warp}/bin/warp-cli connect
-    '';
 in {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
@@ -35,18 +28,6 @@ in {
       ];
       dependsOn = [ ];
       extraOptions = [ ];
-    };
-  };
-  systemd.services.cloudflare-warp-proxy = {
-    enable = true;
-    description = "Cloudflare Warp Proxy for Selfhosted FreshRSS";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network-online.target" "systemd-resolved.service" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash '${freshress-cloudflare-warp-script}'";
-      Restart = "always";
-      User = "cloudflared";
-      Group = "cloudflared";
     };
   };
 
