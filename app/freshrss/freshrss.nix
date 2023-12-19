@@ -36,8 +36,8 @@ in {
       ports = [ "39999:1080" ];
       environment = { WARP_SLEEP = "2"; };
       extraOptions = [
-        "--sysctl net.ipv6.conf.all.disable_ipv6=0"
-        "--sysctl net.ipv4.conf.all.src_valid_mark=1"
+        # "--sysctl net.ipv6.conf.all.disable_ipv6=0"
+        # "--sysctl net.ipv4.conf.all.src_valid_mark=1"
         "--cap-add net_admin"
       ];
     };
