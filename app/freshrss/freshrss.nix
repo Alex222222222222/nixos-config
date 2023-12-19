@@ -37,7 +37,7 @@ in {
       extraOptions = [ ];
     };
   };
-  services.systemd.cloudflare-warp-proxy = {
+  systemd.services.cloudflare-warp-proxy = {
     enable = true;
     description = "Cloudflare Warp Proxy for Selfhosted FreshRSS";
     wantedBy = [ "multi-user.target" ];
