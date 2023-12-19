@@ -27,12 +27,17 @@ in {
         "freshrss_extensions:/var/www/FreshRSS/extensions"
       ];
       dependsOn = [ "freshrss-cloudflare-warp-proxy" ];
+      extraOptions = [ "--network container:freshrss-cloudflare-warp-proxy" ];
     };
     freshrss-cloudflare-warp-proxy = {
-      image = "yarmak/warp-proxy";
+      image = "neilpang/wgcf-docker";
       autoStart = true;
-      ports = [ "0.0.0.0:39999:40000" ];
-      extraOptions = [ ];
+      cmd = [ "-6" ];
+      extraOptions = [
+        "--sysctl net.ipv6.conf.all.disable_ipv6=0"
+        "--privileged"
+        "--cap-add net_admin"
+      ];
     };
   };
 
