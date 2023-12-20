@@ -120,7 +120,7 @@ in {
 
       ./app/postgresql/postgresql.nix
 
-      # ./app/freshrss/freshrss.nix
+      ./app/freshrss/freshrss.nix
     ];
   };
 
