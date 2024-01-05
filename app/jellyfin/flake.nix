@@ -20,7 +20,8 @@
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
-    in {
+    in
+    {
       # Provide some binary packages for selected system types.
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};

@@ -15,7 +15,8 @@ let
     "ext4"
     "vfat"
   ];
-in {
+in
+{
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Select internationalisation properties.
