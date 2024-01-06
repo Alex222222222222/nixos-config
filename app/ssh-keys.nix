@@ -14,7 +14,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFxPhGZ9rAx1bTm5kJ/l4a2CGk4iGY29278KJy7RQLlX root@racknerd"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3WZzDoWCJ3pfjDR3BPbmMmanIk0tNbup5U/F0vtfNE zifan@racknerd"
   ];
-in {
+in
+{
   users.users.zifan.openssh.authorizedKeys.keys = keys;
   users.users.root.openssh.authorizedKeys.keys = keys;
 }

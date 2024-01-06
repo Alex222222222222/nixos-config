@@ -33,7 +33,8 @@ let
   ];
 
   all = systems ++ users;
-in {
+in
+{
   "hetzner-webdav-secrets".publicKeys = all;
   "cloudflare-email-api-key".publicKeys = all;
   "v2ray-config".publicKeys = all;

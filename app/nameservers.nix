@@ -52,7 +52,8 @@ let
     "2606:4700:4700::1113"
     "2606:4700:4700::1003"
   ];
-in {
+in
+{
   options = {
     networking.ipv6_only = lib.mkOption {
       type = lib.types.bool;
