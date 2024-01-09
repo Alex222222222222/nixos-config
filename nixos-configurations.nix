@@ -152,6 +152,8 @@ in {
         ./secrets/secrets-path.nix
         agenix.nixosModules.default
 
+        
+        ./machine/macbookair/gnome.nix
         ./machine/macbookair/hardware-configuration.nix
         ./machine/macbookair/configuration.nix
         ./machine/macbookair/networking.nix
