@@ -60,5 +60,9 @@
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
 
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 99;
+  };
+
   system.stateVersion = system-stateVersion;
 }
