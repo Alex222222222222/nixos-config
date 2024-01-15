@@ -44,7 +44,15 @@
 
     pass-3proxy = { file = ./pass-3proxy; };
 
-    scylla_proxy_tunnel_token = { file = ./scylla_proxy_tunnel_token; };
-    scylla_webui_tunnel_token = { file = ./scylla_webui_tunnel_token; };
+    scylla_proxy_tunnel_token = {
+      file = ./scylla_proxy_tunnel_token;
+      owner = "cloudflared";
+      group = "cloudflared";
+    };
+    scylla_webui_tunnel_token = {
+      file = ./scylla_webui_tunnel_token;
+      owner = "cloudflared";
+      group = "cloudflared";
+    };
   };
 }
