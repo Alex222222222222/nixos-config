@@ -93,7 +93,7 @@ in
 {
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
-    freshrss = {
+    scylla = {
       image = "wildcat/scylla:latest";
       autoStart = true;
       ports = [
@@ -129,7 +129,7 @@ in
     };
   };
 
-    systemd.services.scylla_webui_tunnel = {
+  systemd.services.scylla_webui_tunnel = {
     description = "Scylla WebUI Tunnel for Proxy Pool";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" "systemd-resolved.service" ];
