@@ -47,4 +47,6 @@ in
   "k3s-common-secret".publicKeys = all;
   "k3s-tailscale".publicKeys = all;
   "pass-3proxy".publicKeys = all;
+  "scylla_proxy_tunnel_token".publicKeys = all;
+  "scylla_webui_tunnel_token".publicKeys = all;
 }
