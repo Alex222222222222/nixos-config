@@ -46,6 +46,7 @@ let
     pkgs.starship
     # pkgs.zulu
     pkgs.zulu8
+    pkgs.yt-dlp
   ];
   commonShellHook = ''
     export EDITOR=nvim
