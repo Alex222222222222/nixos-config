@@ -47,6 +47,7 @@ let
     # pkgs.zulu
     pkgs.zulu8
     pkgs.yt-dlp
+    pkgs.ffmpeg_5-full
   ];
   commonShellHook = ''
     export EDITOR=nvim
@@ -105,7 +106,7 @@ let
 
   python = [
     (pkgs.python3.withPackages
-      (ps: [ ps.matplotlib ps.numpy ps.pandas ps.scipy ]))
+      (ps: [ ps.matplotlib ps.numpy ps.pandas ps.scipy ps.requests]))
 
     pkgs.curl
     pkgs.jq
@@ -148,7 +149,7 @@ in
     shellHook = commonShellHook;
   };
   nextjs = pkgs.mkShell {
-    buildInputs = commonBuildInputs ++ nextjs;
+    buildInputs = commonBuildInputs ++ nextjs ++ localBuildInputs;
     shellHook = commonShellHook;
   };
   cloudflare = pkgs.mkShell {
