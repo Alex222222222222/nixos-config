@@ -5,8 +5,8 @@
       enable = true;
       # open the port for the cockroachdb service
       openPorts = true;
-      # listen to tailscale for intra-cluster communication
-      listen.address = "tailscale0";
+      # listen to all interface for intra-cluster communication
+      listen.address = "*";
       # join the cluster
       join = "chicago.tail0c3f1.ts.net:26257,euserv.tail0c3f1.ts.net:26257,server-factory-us.tail0c3f1.ts.net:26257,ihcat.tail0c3f1.ts.net:26257";
       # certs for the cluster
