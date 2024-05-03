@@ -95,6 +95,8 @@ in {
       modules = [
         ./app/common.nix
 
+        ./app/cockroach.nix
+
         ./secrets/secrets-path.nix
         agenix.nixosModules.default
 

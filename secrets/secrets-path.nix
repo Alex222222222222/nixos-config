@@ -54,5 +54,12 @@
       owner = "cloudflared";
       group = "cloudflared";
     };
+
+    cockroach-ca-crt = {
+      file = ./cockroach/certs/ca.crt;
+      owner = "cockroachdb";
+      group = "cockroachdb";
+      path = "/var/lib/cockroach/certs/ca.crt";
+    };
   };
 }

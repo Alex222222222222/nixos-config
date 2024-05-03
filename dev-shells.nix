@@ -106,7 +106,7 @@ let
 
   python = [
     (pkgs.python3.withPackages
-      (ps: [ ps.matplotlib ps.numpy ps.pandas ps.scipy ps.requests]))
+      (ps: [ ps.matplotlib ps.numpy ps.pandas ps.scipy ps.requests ]))
 
     pkgs.curl
     pkgs.jq
@@ -158,6 +158,10 @@ in
   };
   local = pkgs.mkShell {
     buildInputs = commonBuildInputs ++ localBuildInputs;
+    shellHook = commonShellHook;
+  };
+  cockroach = pkgs.mkShell {
+    buildInputs = commonBuildInputs ++ [ pkgs.cockroachdb ];
     shellHook = commonShellHook;
   };
 })
