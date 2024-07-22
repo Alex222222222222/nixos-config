@@ -14,8 +14,6 @@ in {
       modules = [
         ./app/common.nix
 
-        ./app/cockroach.nix
-
         ./secrets/secrets-path.nix
         agenix.nixosModules.default
 
@@ -97,8 +95,6 @@ in {
       modules = [
         ./app/common.nix
 
-        ./app/cockroach.nix
-
         ./secrets/secrets-path.nix
         agenix.nixosModules.default
 
@@ -166,8 +162,6 @@ in {
 
         ./app/docker/docker.nix
         ./app/tailscale/tailscale.nix
-
-        ./app/webdav/hetzner.nix
       ];
     };
 }
