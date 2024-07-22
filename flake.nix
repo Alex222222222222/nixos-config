@@ -49,7 +49,7 @@
   outputs =
     { self, nixpkgs, home-manager, agenix, rust-overlay, ... }@inputs: rec {
       devShells = import ./dev-shells.nix { inherit inputs nixpkgs; };
-
+      
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       formatter.aarch64-darwin =
         nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
