@@ -104,28 +104,6 @@
         "type": "github"
       }
     },
-    "jellyfin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "/app/jellyfin",
-        "lastModified": 1723719126,
-        "narHash": "sha256-nxI/dmvUgrfAhKj2ffIxI5fR4RURj1E3Sgp2I7u32BM=",
-        "owner": "Alex222222222222",
-        "repo": "nixos-config",
-        "rev": "a61c515a4ab2b992fda09824530d1eb5160f0fb5",
-        "type": "github"
-      },
-      "original": {
-        "dir": "/app/jellyfin",
-        "owner": "Alex222222222222",
-        "repo": "nixos-config",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1723637854,
@@ -147,7 +125,6 @@
         "agenix": "agenix",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager_2",
-        "jellyfin": "jellyfin",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"
       }
