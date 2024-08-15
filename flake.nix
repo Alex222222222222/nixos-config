@@ -28,9 +28,6 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    jellyfin.url = "github:Alex222222222222/nixos-config?dir=/app/jellyfin";
-    jellyfin.inputs.nixpkgs.follows = "nixpkgs";
-
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
