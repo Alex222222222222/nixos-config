@@ -49,8 +49,4 @@ in
   "pass-3proxy".publicKeys = all;
   "scylla_proxy_tunnel_token".publicKeys = all;
   "scylla_webui_tunnel_token".publicKeys = all;
-  "cockroach/certs/ca.crt".publicKeys = all;
-  "cockroach/my-safe-directory/ca.key".publicKeys = all;
-  "cockroach/certs/node.crt".publicKeys = all;
-  "cockroach/certs/node.key".publicKeys = all;
 }

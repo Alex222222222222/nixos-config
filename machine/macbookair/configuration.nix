@@ -1,4 +1,11 @@
 { inputs, config, pkgs, system-stateVersion, system, ... }: {
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -41,6 +48,13 @@
     tmux
     htop
     bandwhich
+    nixfmt
+    (vscode-with-extensions.override {
+      vscode = vscodium;
+      vscodeExtensions = with vscode-extensions; [
+        bbenoist.nix
+      ];
+    })
   ];
 
   # Disable suspend on close laptop lib
