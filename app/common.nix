@@ -6,7 +6,6 @@
     ./networking/firewall.nix
     ./docker/docker.nix
     ./tailscale/tailscale.nix
-    ./webdav/hetzner.nix
   ];
 
   users.groups.cloudflared = { };

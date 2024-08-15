@@ -4,12 +4,6 @@
   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
 
   age.secrets = {
-    hetzner-webdav-secrets = {
-      file = ./hetzner-webdav-secrets;
-      owner = "root";
-      group = "root";
-      mode = "600";
-    };
     cloudflare-email-api-key = {
       file = ./cloudflare-email-api-key;
       owner = "root";
@@ -29,8 +23,6 @@
     tailscale-key.file = ./tailscale-key;
 
     postgresql-freshrss-pass.file = ./postgresql-freshrss-pass;
-
-    cloudme-webdav-secrets.file = ./cloudme-webdav-secrets;
 
     freshrss_tunnel_token = {
       file = ./freshrss_tunnel_token;

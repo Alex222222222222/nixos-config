@@ -35,14 +35,12 @@ let
   all = systems ++ users;
 in
 {
-  "hetzner-webdav-secrets".publicKeys = all;
   "cloudflare-email-api-key".publicKeys = all;
   "v2ray-config".publicKeys = all;
   "hysteria-obfs".publicKeys = all;
   "hysteria-alpn".publicKeys = all;
   "tailscale-key".publicKeys = all;
   "postgresql-freshrss-pass".publicKeys = all;
-  "cloudme-webdav-secrets".publicKeys = all;
   "freshrss_tunnel_token".publicKeys = all;
   "k3s-common-secret".publicKeys = all;
   "k3s-tailscale".publicKeys = all;
