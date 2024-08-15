@@ -17,9 +17,6 @@
       mode = "600";
     };
 
-    hysteria-obfs.file = ./hysteria-obfs;
-    hysteria-alpn.file = ./hysteria-alpn;
-
     tailscale-key.file = ./tailscale-key;
 
     postgresql-freshrss-pass.file = ./postgresql-freshrss-pass;

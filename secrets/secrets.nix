@@ -37,8 +37,6 @@ in
 {
   "cloudflare-email-api-key".publicKeys = all;
   "v2ray-config".publicKeys = all;
-  "hysteria-obfs".publicKeys = all;
-  "hysteria-alpn".publicKeys = all;
   "tailscale-key".publicKeys = all;
   "postgresql-freshrss-pass".publicKeys = all;
   "freshrss_tunnel_token".publicKeys = all;
