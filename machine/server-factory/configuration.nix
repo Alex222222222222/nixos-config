@@ -33,7 +33,6 @@
     ncdu
     tmux
     htop
-    bandwhich
   ];
 
   # clean journalctl

@@ -47,7 +47,6 @@
     ncdu
     tmux
     htop
-    bandwhich
     nixfmt
     (vscode-with-extensions.override {
       vscode = vscodium;

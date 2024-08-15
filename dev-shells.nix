@@ -23,7 +23,6 @@ let
     pkgs.curl
     pkgs.wget
     pkgs.ncdu
-    pkgs.bandwhich
     pkgs.neovim
     pkgs.smartmontools
     pkgs.zstd
